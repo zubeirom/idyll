@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../widgets/screen_header.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -11,44 +13,53 @@ class HomeScreen extends StatelessWidget {
       //set brightness for icons, like dark background light icons
     ));
     return Scaffold(
-        appBar: AppBar(
-          brightness: Brightness.light,
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(211, 211, 211, 100),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.sort),
-                  color: Colors.black,
-                  onPressed: () {},
-                ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        brightness: Brightness.light,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(211, 211, 211, 100),
+                borderRadius: BorderRadius.circular(15),
               ),
-              Text(
-                'Idyll',
-                style: TextStyle(color: Colors.black, fontFamily: 'Plaster'),
+              child: IconButton(
+                icon: Icon(Icons.sort),
+                color: Colors.black,
+                onPressed: () {},
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(211, 211, 211, 100),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.search),
-                  color: Colors.black,
-                  onPressed: () {},
-                ),
+            ),
+            AutoSizeText(
+              'Idyll',
+              style: TextStyle(
+                  color: Colors.black, fontFamily: 'Plaster', fontSize: 24),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(211, 211, 211, 100),
+                borderRadius: BorderRadius.circular(15),
               ),
-            ],
-          ),
+              child: IconButton(
+                icon: Icon(Icons.search),
+                color: Colors.black,
+                onPressed: () {},
+              ),
+            ),
+          ],
         ),
-        body: Center(
-          child: Text('Home'),
-        ));
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            SizedBox(height: 15),
+            ScreenHeader('Headlines'),
+          ],
+        ),
+      ),
+    );
   }
 }
