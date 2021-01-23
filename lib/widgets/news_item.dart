@@ -33,7 +33,7 @@ class NewsItem extends StatelessWidget {
               ),
               SizedBox(height: 2),
               AutoSizeText(
-                DateFormat('dd.mm.yyyy').format(DateTime.now()),
+                '${DateFormat('MMM.dd,yyyy').format(DateTime.now())}  •  ${DateFormat.jm().format(DateTime.now())}',
                 style: GoogleFonts.openSans(
                   textStyle: TextStyle(
                     color: Colors.grey,
