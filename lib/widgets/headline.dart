@@ -22,18 +22,18 @@ class Headline extends StatelessWidget {
                 height: 250, width: double.infinity, fit: BoxFit.cover),
           ),
           Positioned(
-            bottom: 20,
-            left: 10,
+            bottom: 0,
             child: Container(
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.black45,
               ),
-              width: 250,
+              width: 300,
               child: AutoSizeText(
-                  "White House Tried to 'Lock Down' Ukraine Call Records, Whistle-Blower Says",
+                  "Hotel quarantine for UK arrivals to be discussed",
                   style: GoogleFonts.prata(
-                    textStyle: TextStyle(color: Colors.white, fontSize: 22),
+                    textStyle: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   softWrap: true,
                   overflow: TextOverflow.fade),

@@ -52,30 +52,32 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 15),
-            ScreenHeader('Headlines'),
-            SizedBox(height: 15),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: <Widget>[
-                  Headline(
-                      "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950"),
-                  SizedBox(width: 15),
-                  Headline(
-                      "https://ichef.bbci.co.uk/news/976/cpsprodpb/59FE/production/_113883032_trump.jpg"),
-                  SizedBox(width: 15),
-                  Headline(
-                      "https://www.ctvnews.ca/polopoly_fs/1.5082834.1598607769!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg"),
-                ],
-              ),
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 15),
+              ScreenHeader('Headlines'),
+              SizedBox(height: 15),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: <Widget>[
+                    Headline(
+                        "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950"),
+                    SizedBox(width: 15),
+                    Headline(
+                        "https://ichef.bbci.co.uk/news/976/cpsprodpb/59FE/production/_113883032_trump.jpg"),
+                    SizedBox(width: 15),
+                    Headline(
+                        "https://www.ctvnews.ca/polopoly_fs/1.5082834.1598607769!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg"),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
