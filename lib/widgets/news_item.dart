@@ -33,7 +33,7 @@ class NewsItem extends StatelessWidget {
               ),
               SizedBox(height: 2),
               AutoSizeText(
-                '${DateFormat('MMM.dd,yyyy').format(DateTime.now())}  •  ${DateFormat.jm().format(DateTime.now())}',
+                'CBS News  •  ${DateFormat('MMM.dd,yyyy').format(DateTime.now())}  •  ${DateFormat.jm().format(DateTime.now())}',
                 style: GoogleFonts.openSans(
                   textStyle: TextStyle(
                     color: Colors.grey,

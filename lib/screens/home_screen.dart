@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
               ),
               Container(
-                height: 500,
+                height: 700,
                 child: TabBarView(
                   controller: _tabController,
                   children: <Widget>[
