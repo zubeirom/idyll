@@ -19,6 +19,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   var _isInit = true;
   var _isLoading = false;
   List<Article> headlines;
+  Map<String, List<Article>> categoryArticles = {
+    'business': [],
+    'science': [],
+    'technology': [],
+    'health': [],
+    'sport': []
+  };
 
   @override
   void initState() {
@@ -38,12 +45,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       setState(() {
         _isLoading = true;
       });
-      final newsProvider = Provider.of<News>(context);
+
+      final newsProvider = Provider.of<News>(context, listen: false);
+
       newsProvider.getHeadlines().then((_) {
         headlines = newsProvider.headlines;
         setState(() {
           _isLoading = false;
         });
+      });
+
+      newsProvider.getByCategory('business', true).then((res) {
+        categoryArticles['business'] = res;
+      });
+
+      newsProvider.getByCategory('science', true).then((res) {
+        categoryArticles['science'] = res;
+      });
+
+      newsProvider.getByCategory('health', true).then((res) {
+        categoryArticles['health'] = res;
+      });
+
+      newsProvider.getByCategory('sport', true).then((res) {
+        categoryArticles['sport'] = res;
+      });
+
+      newsProvider.getByCategory('technology', true).then((res) {
+        categoryArticles['technology'] = res;
       });
     }
     _isInit = false;
@@ -132,9 +161,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       SizedBox(height: 40),
                       Container(
                         child: TabBar(
-                          onTap: (val) {
-                            print(val);
-                          },
                           tabs: [
                             Container(
                               child: Icon(Icons.business_center_outlined),
@@ -164,11 +190,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: TabBarView(
                           controller: _tabController,
                           children: <Widget>[
-                            NewsList("Business", "business"),
-                            NewsList("Science", "science"),
-                            NewsList("Health", "health"),
-                            NewsList("Sport", "sport"),
-                            NewsList("Technology", "technology"),
+                            NewsList("Business", categoryArticles["business"]),
+                            NewsList("Science", categoryArticles["science"]),
+                            NewsList("Health", categoryArticles["health"]),
+                            NewsList("Sport", categoryArticles["sport"]),
+                            NewsList(
+                                "Technology", categoryArticles["technology"]),
                           ],
                         ),
                       ),

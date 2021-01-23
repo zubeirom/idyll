@@ -55,9 +55,10 @@ class News with ChangeNotifier {
       if (shortList) {
         return list.sublist(0, 8);
       }
+      notifyListeners();
       return list;
     } catch (e) {
-      print(e);
+      throw e;
     }
   }
 
@@ -68,7 +69,7 @@ class News with ChangeNotifier {
         Article(
           author: article['author'],
           description: article['description'],
-          publishedAt: DateTime.parse(article['publishedAt']),
+          publishedAt: DateTime.now(), //DateTime.parse(article['publishedAt'])
           source: article['source'],
           title: article['title'],
           url: article['url'],
