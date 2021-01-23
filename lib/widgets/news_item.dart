@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:idyll/providers/news.dart';
 import 'package:intl/intl.dart';
 
 class NewsItem extends StatelessWidget {
-  final String imageUrl;
-  final String title;
+  final Article article;
 
-  NewsItem(this.imageUrl, this.title);
+  NewsItem(this.article);
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +17,14 @@ class NewsItem extends StatelessWidget {
           contentPadding: EdgeInsets.only(right: 10),
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.network(imageUrl),
+            child: Image.network(article.urlToImage,
+                height: 50, width: 70, fit: BoxFit.cover),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AutoSizeText(
-                title,
+                article.title,
                 minFontSize: 13,
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
@@ -38,7 +39,7 @@ class NewsItem extends StatelessWidget {
               ),
               SizedBox(height: 2),
               AutoSizeText(
-                'CBS News  •  ${DateFormat('MMM.dd,yyyy').format(DateTime.now())}  •  ${DateFormat.jm().format(DateTime.now())}',
+                '${article.source['name']}  •  ${DateFormat('MMM.dd,yyyy').format(article.publishedAt)}  •  ${DateFormat.jm().format(article.publishedAt)}',
                 style: GoogleFonts.openSans(
                   textStyle: TextStyle(
                     color: Colors.grey,

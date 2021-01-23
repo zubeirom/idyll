@@ -1,62 +1,80 @@
 import 'package:flutter/material.dart';
-
+import 'package:idyll/providers/news.dart';
+import 'package:provider/provider.dart';
 import 'news_item.dart';
 import 'regular_button.dart';
 import 'screen_header.dart';
 
 enum Category { BUSINESS, HEALTH, SCIENCE, SPORTS, TECHNOLOGY }
 
-class NewsList extends StatelessWidget {
+class NewsList extends StatefulWidget {
+  final String categoryType;
+  final String categoryTitle;
+
+  NewsList(this.categoryTitle, this.categoryType);
+
+  @override
+  _NewsListState createState() => _NewsListState();
+}
+
+class _NewsListState extends State<NewsList> {
+  List<Article> articlesList;
+  var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<News>(context)
+          .getByCategory(widget.categoryType, true)
+          .then((res) {
+        articlesList = res;
+        setState(() {
+          _isLoading = false;
+        });
+        print(articlesList);
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ScreenHeader("Business"),
-                Container(
-                  padding: EdgeInsets.only(right: 10),
-                  child: RegularButton(),
-                ),
-              ],
+      child: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ScreenHeader(widget.categoryTitle),
+                      Container(
+                        padding: EdgeInsets.only(right: 10),
+                        child: RegularButton(),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Column(
+                    children: articlesList
+                        .map((article) => NewsItem(article))
+                        .toList(),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 15),
-            Column(
-              children: [
-                NewsItem(
-                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                    "Coronavirus updates: Larry King dies after being hospitalized with COVID-19; Capitol Police, National Guard report new cases"),
-                NewsItem(
-                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                    "States scramble for more COVID-19 vaccines, new concern over contagious variant"),
-                NewsItem(
-                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                    "Larry King, legendary talk show host, dies at 87"),
-                NewsItem(
-                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                NewsItem(
-                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                NewsItem(
-                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                NewsItem(
-                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                NewsItem(
-                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                    "Egypt Is on Edge as Security Tightens Over Protest"),
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

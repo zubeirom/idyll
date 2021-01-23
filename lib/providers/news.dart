@@ -8,7 +8,7 @@ class Article {
   final String content;
   final String description;
   final DateTime publishedAt;
-  final Map<String, String> source;
+  final Map<String, dynamic> source;
   final String title;
   final String url;
   final String urlToImage;
@@ -29,24 +29,53 @@ class News with ChangeNotifier {
 
   List<Article> _headlinesList = [];
 
-  List<Article> get _headlines {
-    if (_headlines.length <= 10) {
-      return _headlines.sublist(0, 10);
+  List<Article> get headlines {
+    if (_headlinesList.length > 10) {
+      return _headlinesList.sublist(0, 10);
     }
-    return _headlines;
+    return _headlinesList;
   }
 
   Future<void> getHeadlines() async {
     try {
       final res = await http.get(BASE_URL + '/news');
       final extractData = json.decode(res.body) as Map<String, dynamic>;
-      print(extractData);
+      _headlinesList = _mapArticle(extractData['articles']);
+      notifyListeners();
     } catch (e) {
       print(e);
     }
   }
 
-  // List<Article> _mapArticle() {
-  //   return
-  // }zz
+  Future<List<Article>> getByCategory(String category, bool shortList) async {
+    try {
+      final res = await http.get(BASE_URL + '/news?category=$category');
+      final extractData = json.decode(res.body) as Map<String, dynamic>;
+      final list = _mapArticle(extractData['articles']);
+      if (shortList) {
+        return list.sublist(0, 8);
+      }
+      return list;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  List<Article> _mapArticle(List data) {
+    final List<Article> loadedArticles = [];
+    data.forEach((article) {
+      loadedArticles.add(
+        Article(
+          author: article['author'],
+          description: article['description'],
+          publishedAt: DateTime.parse(article['publishedAt']),
+          source: article['source'],
+          title: article['title'],
+          url: article['url'],
+          urlToImage: article['urlToImage'],
+        ),
+      );
+    });
+    return loadedArticles;
+  }
 }

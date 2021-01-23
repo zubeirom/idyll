@@ -2,10 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:idyll/providers/news.dart';
+import 'package:idyll/widgets/headline.dart';
 import 'package:idyll/widgets/image_link_list.dart';
 import 'package:idyll/widgets/regular_button.dart';
 import 'package:provider/provider.dart';
-import '../widgets/headline.dart';
 import '../widgets/news_list.dart';
 import '../widgets/screen_header.dart';
 
@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   TabController _tabController;
   var _isInit = true;
   var _isLoading = false;
+  List<Article> headlines;
 
   @override
   void initState() {
@@ -37,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<News>(context, listen: false).getHeadlines().then((_) {
+      final newsProvider = Provider.of<News>(context);
+      newsProvider.getHeadlines().then((_) {
+        headlines = newsProvider.headlines;
         setState(() {
           _isLoading = false;
         });
@@ -121,19 +124,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: <Widget>[
-                            Headline(
-                                "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950"),
-                            Headline(
-                                "https://ichef.bbci.co.uk/news/976/cpsprodpb/59FE/production/_113883032_trump.jpg"),
-                            Headline(
-                                "https://www.ctvnews.ca/polopoly_fs/1.5082834.1598607769!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg"),
-                          ],
+                          children: headlines
+                              .map((article) => Headline(article))
+                              .toList(),
                         ),
                       ),
                       SizedBox(height: 40),
                       Container(
                         child: TabBar(
+                          onTap: (val) {
+                            print(val);
+                          },
                           tabs: [
                             Container(
                               child: Icon(Icons.business_center_outlined),
@@ -163,11 +164,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: TabBarView(
                           controller: _tabController,
                           children: <Widget>[
-                            NewsList(),
-                            NewsList(),
-                            NewsList(),
-                            NewsList(),
-                            NewsList(),
+                            NewsList("Business", "business"),
+                            NewsList("Science", "science"),
+                            NewsList("Health", "health"),
+                            NewsList("Sport", "sport"),
+                            NewsList("Technology", "technology"),
                           ],
                         ),
                       ),

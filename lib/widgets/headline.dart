@@ -1,13 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:idyll/providers/news.dart';
 
 class Headline extends StatelessWidget {
-  final String imageUrl;
-  // final String title;
-  // final String author;
+  final Article article;
 
-  Headline(this.imageUrl);
+  Headline(this.article);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class Headline extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image.network(
-                  imageUrl,
+                  article.urlToImage,
                   height: 250,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -53,7 +52,7 @@ class Headline extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        "Coronavirus updates: Larry King dies after being hospitalized with COVID-19; Capitol Police, National Guard report new cases",
+                        article.title,
                         style: GoogleFonts.domine(
                           textStyle:
                               TextStyle(color: Colors.white, fontSize: 20),
@@ -65,7 +64,7 @@ class Headline extends StatelessWidget {
                       ),
                       SizedBox(height: 2),
                       AutoSizeText(
-                        "Author: CBS News",
+                        "Author: ${article.source['name']}",
                         style: GoogleFonts.domine(
                           textStyle:
                               TextStyle(color: Colors.white, fontSize: 12),
