@@ -24,13 +24,15 @@ class NewsItem extends StatelessWidget {
             children: [
               AutoSizeText(
                 title,
+                minFontSize: 13,
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
-                maxLines: 2,
+                maxLines: 3,
                 style: GoogleFonts.domine(
                   textStyle: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w700,
+                    fontSize: 13,
                   ),
                 ),
               ),
