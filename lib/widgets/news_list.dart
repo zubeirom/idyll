@@ -19,7 +19,10 @@ class NewsList extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ScreenHeader("Business"),
-                RegularButton(),
+                Container(
+                  padding: EdgeInsets.only(right: 10),
+                  child: RegularButton(),
+                ),
               ],
             ),
             SizedBox(height: 15),

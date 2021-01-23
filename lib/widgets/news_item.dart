@@ -14,7 +14,7 @@ class NewsItem extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          contentPadding: EdgeInsets.all(0),
+          contentPadding: EdgeInsets.only(right: 10),
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(imageUrl),

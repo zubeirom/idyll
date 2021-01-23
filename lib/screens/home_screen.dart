@@ -128,18 +128,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   controller: _tabController,
                   children: <Widget>[
                     NewsList(),
-                    Container(
-                      child: ScreenHeader('Business'),
-                    ),
-                    Container(
-                      child: ScreenHeader('Business'),
-                    ),
-                    Container(
-                      child: ScreenHeader('Business'),
-                    ),
-                    Container(
-                      child: ScreenHeader('Business'),
-                    ),
+                    NewsList(),
+                    NewsList(),
+                    NewsList(),
+                    NewsList(),
                   ],
                 ),
               )
