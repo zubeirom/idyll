@@ -32,13 +32,33 @@ class Headline extends StatelessWidget {
                     color: Colors.black45,
                   ),
                   width: 300,
-                  child: AutoSizeText(
-                      "Hotel quarantine for UK arrivals to be discussed",
-                      style: GoogleFonts.domine(
-                        textStyle: TextStyle(color: Colors.white, fontSize: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AutoSizeText(
+                        "Coronavirus updates: Larry King dies after being hospitalized with COVID-19; Capitol Police, National Guard report new cases",
+                        style: GoogleFonts.domine(
+                          textStyle:
+                              TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        minFontSize: 16,
                       ),
-                      softWrap: true,
-                      overflow: TextOverflow.fade),
+                      SizedBox(height: 2),
+                      AutoSizeText(
+                        "Author: CBS News",
+                        style: GoogleFonts.domine(
+                          textStyle:
+                              TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        minFontSize: 12,
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
