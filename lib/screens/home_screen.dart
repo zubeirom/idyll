@@ -50,29 +50,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
       newsProvider.getHeadlines().then((_) {
         headlines = newsProvider.headlines;
-        setState(() {
-          _isLoading = false;
+        newsProvider.populateCategories().then((_) {
+          categoryArticles = newsProvider.categoryArticles;
+          setState(() {
+            _isLoading = false;
+          });
         });
-      });
-
-      newsProvider.getByCategory('business', true).then((res) {
-        categoryArticles['business'] = res;
-      });
-
-      newsProvider.getByCategory('science', true).then((res) {
-        categoryArticles['science'] = res;
-      });
-
-      newsProvider.getByCategory('health', true).then((res) {
-        categoryArticles['health'] = res;
-      });
-
-      newsProvider.getByCategory('sport', true).then((res) {
-        categoryArticles['sport'] = res;
-      });
-
-      newsProvider.getByCategory('technology', true).then((res) {
-        categoryArticles['technology'] = res;
       });
     }
     _isInit = false;
@@ -80,16 +63,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Future<void> _refreshPage(BuildContext context) async {
-    await Provider.of<News>(context, listen: false).getHeadlines();
+    setState(() {
+      _isInit = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      //color set to transperent or set your own color
       statusBarIconBrightness: Brightness.dark,
-      //set brightness for icons, like dark background light icons
     ));
 
     Provider.of<News>(context).getHeadlines();

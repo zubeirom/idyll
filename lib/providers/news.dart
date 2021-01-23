@@ -28,12 +28,23 @@ class News with ChangeNotifier {
   static const BASE_URL = "https://api-idyll.now.sh";
 
   List<Article> _headlinesList = [];
+  Map<String, List<Article>> _categoryArticles = {
+    'business': [],
+    'science': [],
+    'health': [],
+    'technology': [],
+    'sport': []
+  };
 
   List<Article> get headlines {
     if (_headlinesList.length > 10) {
       return _headlinesList.sublist(0, 10);
     }
     return _headlinesList;
+  }
+
+  Map<String, List<Article>> get categoryArticles {
+    return {..._categoryArticles};
   }
 
   Future<void> getHeadlines() async {
@@ -47,16 +58,27 @@ class News with ChangeNotifier {
     }
   }
 
-  Future<List<Article>> getByCategory(String category, bool shortList) async {
+  Future<List<Article>> getByCategory(String category) async {
     try {
       final res = await http.get(BASE_URL + '/news?category=$category');
       final extractData = json.decode(res.body) as Map<String, dynamic>;
       final list = _mapArticle(extractData['articles']);
-      if (shortList) {
-        return list.sublist(0, 8);
-      }
       notifyListeners();
       return list;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> populateCategories() async {
+    try {
+      Map<String, List<Article>> data = {};
+      data['business'] = await getByCategory('business');
+      data['science'] = await getByCategory('science');
+      data['technology'] = await getByCategory('technology');
+      data['health'] = await getByCategory('health');
+      data['sport'] = await getByCategory('sport');
+      _categoryArticles = data;
     } catch (e) {
       throw e;
     }
