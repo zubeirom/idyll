@@ -24,6 +24,9 @@ class NewsItem extends StatelessWidget {
             children: [
               AutoSizeText(
                 title,
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                maxLines: 2,
                 style: GoogleFonts.domine(
                   textStyle: TextStyle(
                     color: Colors.black,

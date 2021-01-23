@@ -127,46 +127,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: TabBarView(
                   controller: _tabController,
                   children: <Widget>[
-                    Container(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 20),
-                            ScreenHeader("Business"),
-                            SizedBox(height: 20),
-                            Column(
-                              children: [
-                                NewsItem(
-                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                                NewsItem(
-                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                                NewsItem(
-                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                                NewsItem(
-                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                                NewsItem(
-                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                                NewsItem(
-                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                                NewsItem(
-                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                                NewsItem(
-                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
-                                    "Egypt Is on Edge as Security Tightens Over Protest"),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    NewsList(),
                     Container(
                       child: ScreenHeader('Business'),
                     ),
