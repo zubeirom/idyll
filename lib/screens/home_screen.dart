@@ -4,7 +4,26 @@ import 'package:flutter/services.dart';
 import 'package:idyll/widgets/headline.dart';
 import '../widgets/screen_header.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 5, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -67,12 +86,66 @@ class HomeScreen extends StatelessWidget {
                   children: <Widget>[
                     Headline(
                         "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950"),
-                    SizedBox(width: 15),
                     Headline(
                         "https://ichef.bbci.co.uk/news/976/cpsprodpb/59FE/production/_113883032_trump.jpg"),
-                    SizedBox(width: 15),
                     Headline(
                         "https://www.ctvnews.ca/polopoly_fs/1.5082834.1598607769!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg"),
+                  ],
+                ),
+              ),
+              SizedBox(height: 40),
+              Container(
+                child: TabBar(
+                  tabs: [
+                    Container(
+                      child: Icon(Icons.business_center_outlined),
+                    ),
+                    Container(
+                      child: Icon(Icons.wb_incandescent_outlined),
+                    ),
+                    Container(
+                      child: Icon(Icons.favorite_border_outlined),
+                    ),
+                    Container(
+                      child: Icon(Icons.sports_basketball_outlined),
+                    ),
+                    Container(
+                      child: Icon(Icons.devices_other_outlined),
+                    )
+                  ],
+                  unselectedLabelColor: const Color(0xffacb3bf),
+                  labelColor: Colors.black,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  isScrollable: false,
+                  controller: _tabController,
+                ),
+              ),
+              Container(
+                height: 100,
+                child: TabBarView(
+                  controller: _tabController,
+                  children: <Widget>[
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20),
+                          ScreenHeader("Business"),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Text("2"),
+                    ),
+                    Container(
+                      child: Text("3"),
+                    ),
+                    Container(
+                      child: Text("4"),
+                    ),
+                    Container(
+                      child: Text("5"),
+                    )
                   ],
                 ),
               )

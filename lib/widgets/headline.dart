@@ -11,36 +11,41 @@ class Headline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 220,
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.network(imageUrl,
-                height: 250, width: double.infinity, fit: BoxFit.cover),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Container(
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
+    return Row(
+      children: [
+        Container(
+          width: 300,
+          height: 220,
+          child: Stack(
+            children: [
+              ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                color: Colors.black45,
+                child: Image.network(imageUrl,
+                    height: 250, width: double.infinity, fit: BoxFit.cover),
               ),
-              width: 300,
-              child: AutoSizeText(
-                  "Hotel quarantine for UK arrivals to be discussed",
-                  style: GoogleFonts.prata(
-                    textStyle: TextStyle(color: Colors.white, fontSize: 20),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.black45,
                   ),
-                  softWrap: true,
-                  overflow: TextOverflow.fade),
-            ),
-          )
-        ],
-      ),
+                  width: 300,
+                  child: AutoSizeText(
+                      "Hotel quarantine for UK arrivals to be discussed",
+                      style: GoogleFonts.prata(
+                        textStyle: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      softWrap: true,
+                      overflow: TextOverflow.fade),
+                ),
+              )
+            ],
+          ),
+        ),
+        SizedBox(width: 15),
+      ],
     );
   }
 }
