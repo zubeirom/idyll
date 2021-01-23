@@ -12,7 +12,8 @@ class ScreenHeader extends StatelessWidget {
     return AutoSizeText(
       title,
       style: GoogleFonts.openSans(
-        textStyle: TextStyle(color: Colors.red),
+        textStyle: TextStyle(
+            color: Colors.black, fontSize: 25, fontWeight: FontWeight.w700),
       ),
     );
   }
