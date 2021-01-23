@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './screens/home_screen.dart';
+import 'providers/news.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,13 +10,20 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Idyll',
-      theme: ThemeData(
-        accentColor: Colors.black,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: News(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Idyll',
+        theme: ThemeData(
+          accentColor: Colors.black,
+        ),
+        home: HomeScreen(),
       ),
-      home: HomeScreen(),
     );
   }
 }
