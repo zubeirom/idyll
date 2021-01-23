@@ -34,7 +34,7 @@ class Headline extends StatelessWidget {
                   width: 300,
                   child: AutoSizeText(
                       "Hotel quarantine for UK arrivals to be discussed",
-                      style: GoogleFonts.prata(
+                      style: GoogleFonts.domine(
                         textStyle: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       softWrap: true,

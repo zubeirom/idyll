@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:idyll/widgets/headline.dart';
+import 'package:idyll/widgets/news_item.dart';
+import '../widgets/headline.dart';
+import '../widgets/news_list.dart';
 import '../widgets/screen_header.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -121,31 +123,62 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
               ),
               Container(
-                height: 100,
+                height: 500,
                 child: TabBarView(
                   controller: _tabController,
                   children: <Widget>[
                     Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 20),
-                          ScreenHeader("Business"),
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 20),
+                            ScreenHeader("Business"),
+                            SizedBox(height: 20),
+                            Column(
+                              children: [
+                                NewsItem(
+                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
+                                    "Egypt Is on Edge as Security Tightens Over Protest"),
+                                NewsItem(
+                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
+                                    "Egypt Is on Edge as Security Tightens Over Protest"),
+                                NewsItem(
+                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
+                                    "Egypt Is on Edge as Security Tightens Over Protest"),
+                                NewsItem(
+                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
+                                    "Egypt Is on Edge as Security Tightens Over Protest"),
+                                NewsItem(
+                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
+                                    "Egypt Is on Edge as Security Tightens Over Protest"),
+                                NewsItem(
+                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
+                                    "Egypt Is on Edge as Security Tightens Over Protest"),
+                                NewsItem(
+                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
+                                    "Egypt Is on Edge as Security Tightens Over Protest"),
+                                NewsItem(
+                                    "https://image.cnbcfm.com/api/v1/image/104950937-RTX4DFJL-1.jpg?v=1529452421&w=1400&h=950",
+                                    "Egypt Is on Edge as Security Tightens Over Protest"),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Container(
-                      child: Text("2"),
+                      child: ScreenHeader('Business'),
                     ),
                     Container(
-                      child: Text("3"),
+                      child: ScreenHeader('Business'),
                     ),
                     Container(
-                      child: Text("4"),
+                      child: ScreenHeader('Business'),
                     ),
                     Container(
-                      child: Text("5"),
-                    )
+                      child: ScreenHeader('Business'),
+                    ),
                   ],
                 ),
               )
