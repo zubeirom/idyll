@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ScreenHeader('News Sources'),
-                          RegularButton(),
+                          RegularButton('Show all', () {}),
                         ],
                       ),
                       SizedBox(height: 15),
@@ -217,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ScreenHeader('Countries'),
-                          RegularButton(),
+                          RegularButton('Show all', () {}),
                         ],
                       ),
                       SizedBox(height: 15),

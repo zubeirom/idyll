@@ -26,7 +26,7 @@ class NewsList extends StatelessWidget {
                 ScreenHeader(categoryTitle),
                 Container(
                   padding: EdgeInsets.only(right: 10),
-                  child: RegularButton(),
+                  child: RegularButton('Show all', () {}),
                 ),
               ],
             ),

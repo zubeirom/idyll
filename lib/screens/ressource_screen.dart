@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:idyll/providers/news.dart';
+import 'package:idyll/widgets/regular_button.dart';
 
 class RessourceScreen extends StatelessWidget {
   static const routeName = '/ressource';
@@ -46,11 +49,72 @@ class RessourceScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 400,
+                height: 300,
                 width: double.infinity,
                 child: Image.network(
                   article.urlToImage,
                   fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Color.fromRGBO(211, 211, 211, 100),
+                          child: IconButton(
+                            icon: FaIcon(FontAwesomeIcons.facebookF),
+                            onPressed: () {},
+                            color: Colors.black,
+                            iconSize: 16,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        CircleAvatar(
+                          backgroundColor: Color.fromRGBO(211, 211, 211, 100),
+                          child: IconButton(
+                            icon: FaIcon(FontAwesomeIcons.twitter),
+                            onPressed: () {},
+                            color: Colors.black,
+                            iconSize: 16,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        CircleAvatar(
+                          backgroundColor: Color.fromRGBO(211, 211, 211, 100),
+                          child: IconButton(
+                            icon: FaIcon(FontAwesomeIcons.share),
+                            onPressed: () {},
+                            color: Colors.black,
+                            iconSize: 16,
+                          ),
+                        )
+                      ],
+                    ),
+                    RegularButton("Read article", () {})
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Text(
+                  article.title,
+                  style: GoogleFonts.domine(
+                    textStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Divider(
+                  color: Colors.grey,
                 ),
               )
             ],

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegularButton extends StatelessWidget {
+  final String title;
+  final Function handler;
+
+  RegularButton(this.title, this.handler);
+
   @override
   Widget build(BuildContext context) {
     return ButtonTheme(
@@ -10,7 +15,7 @@ class RegularButton extends StatelessWidget {
       child: RaisedButton(
         elevation: 0,
         child: Text(
-          'Show all',
+          title,
           style: GoogleFonts.openSans(
             textStyle: TextStyle(
               color: Colors.black,
@@ -23,7 +28,7 @@ class RegularButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        onPressed: () {},
+        onPressed: handler,
       ),
     );
   }
