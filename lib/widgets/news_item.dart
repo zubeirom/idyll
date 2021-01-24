@@ -13,7 +13,7 @@ class NewsItem extends StatelessWidget {
   void showModal(BuildContext context) {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
       ),
       context: context,
       builder: (context) {

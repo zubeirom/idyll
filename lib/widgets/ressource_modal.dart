@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:idyll/widgets/regular_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RessourceModal extends StatelessWidget {
   final Article article;
@@ -15,7 +16,7 @@ class RessourceModal extends StatelessWidget {
         children: [
           Stack(children: [
             Container(
-              height: 300,
+              height: 280,
               width: double.infinity,
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(
@@ -83,7 +84,9 @@ class RessourceModal extends StatelessWidget {
                     )
                   ],
                 ),
-                RegularButton("Read article", () {})
+                RegularButton("Read article", () {
+                  launch(article.url);
+                })
               ],
             ),
           ),
@@ -105,6 +108,10 @@ class RessourceModal extends StatelessWidget {
             child: Divider(
               color: Colors.grey,
             ),
+          ),
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Text(article.description),
           )
         ],
       ),
