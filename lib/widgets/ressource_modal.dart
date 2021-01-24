@@ -9,6 +9,14 @@ class RessourceModal extends StatelessWidget {
   final Article article;
   RessourceModal(this.article);
 
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -85,7 +93,7 @@ class RessourceModal extends StatelessWidget {
                   ],
                 ),
                 RegularButton("Read article", () {
-                  launch(article.url);
+                  _launchURL(article.url);
                 })
               ],
             ),
