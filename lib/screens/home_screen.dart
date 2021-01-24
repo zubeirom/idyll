@@ -6,6 +6,7 @@ import 'package:idyll/widgets/headline.dart';
 import 'package:idyll/widgets/image_link_list.dart';
 import 'package:idyll/widgets/regular_button.dart';
 import 'package:provider/provider.dart';
+import '../util.dart';
 import '../widgets/news_list.dart';
 import '../widgets/screen_header.dart';
 
@@ -173,12 +174,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: TabBarView(
                           controller: _tabController,
                           children: <Widget>[
-                            NewsList("Business", categoryArticles["business"]),
-                            NewsList("Science", categoryArticles["science"]),
-                            NewsList("Health", categoryArticles["health"]),
-                            NewsList("Sport", categoryArticles["sport"]),
                             NewsList(
-                                "Technology", categoryArticles["technology"]),
+                              "Business",
+                              Util.sublist(categoryArticles["business"], 0, 8),
+                            ),
+                            NewsList(
+                              "Science",
+                              Util.sublist(categoryArticles["science"], 0, 8),
+                            ),
+                            NewsList(
+                              "Health",
+                              Util.sublist(categoryArticles["health"], 0, 8),
+                            ),
+                            NewsList(
+                              "Sport",
+                              Util.sublist(categoryArticles["sport"], 0, 8),
+                            ),
+                            NewsList(
+                              "Technology",
+                              Util.sublist(
+                                  categoryArticles["technology"], 0, 8),
+                            ),
                           ],
                         ),
                       ),
