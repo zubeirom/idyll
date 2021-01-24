@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:idyll/providers/news.dart';
+import 'package:idyll/screens/ressource_screen.dart';
 import 'package:intl/intl.dart';
 
 class NewsItem extends StatelessWidget {
@@ -14,6 +15,10 @@ class NewsItem extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          onTap: () {
+            Navigator.of(context)
+                .pushNamed(RessourceScreen.routeName, arguments: article);
+          },
           contentPadding: EdgeInsets.only(right: 10),
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(8),

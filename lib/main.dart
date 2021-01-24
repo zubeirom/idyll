@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:idyll/screens/ressource_screen.dart';
 import 'package:provider/provider.dart';
 import './screens/home_screen.dart';
 import 'providers/news.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.black,
         ),
         home: HomeScreen(),
+        routes: {
+          RessourceScreen.routeName: (ctx) => RessourceScreen(),
+        },
       ),
     );
   }
