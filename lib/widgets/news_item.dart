@@ -28,53 +28,68 @@ class NewsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          onTap: () {
-            // Navigator.of(context)
-            //     .pushNamed(RessourceScreen.routeName, arguments: article);
-            showModal(context);
-          },
-          contentPadding: EdgeInsets.only(right: 10),
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(article.urlToImage,
-                height: 50, width: 70, fit: BoxFit.cover),
-          ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AutoSizeText(
-                article.title,
-                minFontSize: 13,
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                maxLines: 3,
-                style: GoogleFonts.domine(
-                  textStyle: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 13,
-                  ),
-                ),
+    return InkWell(
+      onTap: () {
+        showModal(context);
+      },
+      child: Card(
+        elevation: 0,
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network(
+                article.urlToImage,
+                height: 180,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes
+                          : null,
+                    ),
+                  );
+                },
               ),
-              SizedBox(height: 2),
-              AutoSizeText(
-                '${article.source['name']}  •  ${DateFormat('MMM.dd,yyyy').format(article.publishedAt)}  •  ${DateFormat.jm().format(article.publishedAt)}',
-                style: GoogleFonts.openSans(
-                  textStyle: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
+            ),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeText(
+                    article.title,
+                    style: GoogleFonts.domine(
+                      textStyle: TextStyle(color: Colors.black, fontSize: 16),
+                    ),
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    minFontSize: 16,
                   ),
-                ),
+                  SizedBox(height: 5),
+                  AutoSizeText(
+                    "${article.source['name']}  •  ${DateFormat('MMM.dd,yyyy').format(article.publishedAt)}  •  ${DateFormat.jm().format(article.publishedAt)}",
+                    style: GoogleFonts.domine(
+                      textStyle: TextStyle(color: Colors.black, fontSize: 12),
+                    ),
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    minFontSize: 12,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        SizedBox(height: 15)
-      ],
+      ),
     );
   }
 }

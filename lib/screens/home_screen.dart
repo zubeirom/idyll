@@ -142,89 +142,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               .toList(),
                         ),
                       ),
-                      SizedBox(height: 40),
-                      Container(
-                        child: TabBar(
-                          tabs: [
-                            Container(
-                              child: Icon(Icons.business_center_outlined),
-                            ),
-                            Container(
-                              child: Icon(Icons.wb_incandescent_outlined),
-                            ),
-                            Container(
-                              child: Icon(Icons.favorite_border_outlined),
-                            ),
-                            Container(
-                              child: Icon(Icons.sports_basketball_outlined),
-                            ),
-                            Container(
-                              child: Icon(Icons.devices_other_outlined),
-                            )
-                          ],
-                          unselectedLabelColor: const Color(0xffacb3bf),
-                          labelColor: Colors.black,
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          isScrollable: false,
-                          controller: _tabController,
-                        ),
-                      ),
-                      Container(
-                        height: 700,
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: <Widget>[
-                            NewsList(
-                              "Business",
-                              Util.sublist(categoryArticles["business"], 0, 8),
-                            ),
-                            NewsList(
-                              "Science",
-                              Util.sublist(categoryArticles["science"], 0, 8),
-                            ),
-                            NewsList(
-                              "Health",
-                              Util.sublist(categoryArticles["health"], 0, 8),
-                            ),
-                            NewsList(
-                              "Sport",
-                              Util.sublist(categoryArticles["sport"], 0, 8),
-                            ),
-                            NewsList(
-                              "Technology",
-                              Util.sublist(
-                                  categoryArticles["technology"], 0, 8),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ScreenHeader('News Sources'),
-                          RegularButton('Show all', () {}),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: ImageLinkList(),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ScreenHeader('Countries'),
-                          RegularButton('Show all', () {}),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: ImageLinkList(),
-                      ),
+                      SizedBox(height: 25),
+                      NewsList(
+                        "Business",
+                        Util.sublist(categoryArticles["business"], 0, 8),
+                      )
                     ],
                   ),
                 ),
