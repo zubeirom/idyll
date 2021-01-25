@@ -14,70 +14,69 @@ class Headline extends StatelessWidget {
       children: [
         Container(
           width: 300,
-          height: 220,
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.network(
-                  article.urlToImage,
-                  height: 250,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes
-                            : null,
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
+          height: 280,
+          child: InkWell(
+            onTap: () {},
+            child: Card(
+              elevation: 0,
+              child: Column(
+                children: [
+                  ClipRRect(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.black45,
+                    child: Image.network(
+                      article.urlToImage,
+                      height: 180,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes
+                                : null,
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                  width: 300,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AutoSizeText(
-                        article.title,
-                        style: GoogleFonts.domine(
-                          textStyle:
-                              TextStyle(color: Colors.white, fontSize: 20),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AutoSizeText(
+                          article.title,
+                          style: GoogleFonts.domine(
+                            textStyle:
+                                TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          minFontSize: 16,
                         ),
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        minFontSize: 16,
-                      ),
-                      SizedBox(height: 2),
-                      AutoSizeText(
-                        "Author: ${article.source['name']}",
-                        style: GoogleFonts.domine(
-                          textStyle:
-                              TextStyle(color: Colors.white, fontSize: 12),
+                        SizedBox(height: 5),
+                        AutoSizeText(
+                          "Author: ${article.source['name']}",
+                          style: GoogleFonts.domine(
+                            textStyle:
+                                TextStyle(color: Colors.black, fontSize: 12),
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          minFontSize: 12,
                         ),
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        minFontSize: 12,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                ],
+              ),
+            ),
           ),
         ),
         SizedBox(width: 15),
