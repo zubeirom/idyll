@@ -40,9 +40,9 @@ class News with ChangeNotifier {
     return {..._categoryArticles};
   }
 
-  Future<void> getHeadlines() async {
+  Future<void> getHeadlines({String locale = "us"}) async {
     try {
-      final res = await http.get(BASE_URL + '/news');
+      final res = await http.get(BASE_URL + '/news?locale=$locale');
       final extractData = json.decode(res.body) as Map<String, dynamic>;
       _headlinesList = _mapArticle(extractData['articles']);
       notifyListeners();
@@ -51,7 +51,7 @@ class News with ChangeNotifier {
     }
   }
 
-  Future<List<Article>> getByCategory(String category) async {
+  Future<List<Article>> getByCategory(String category, String locale) async {
     try {
       final res = await http.get(BASE_URL + '/news?category=$category');
       final extractData = json.decode(res.body) as Map<String, dynamic>;
@@ -66,15 +66,37 @@ class News with ChangeNotifier {
   Future<void> populateCategories() async {
     try {
       Map<String, List<Article>> data = {};
-      data['business'] = await getByCategory('business');
-      data['science'] = await getByCategory('science');
-      data['technology'] = await getByCategory('technology');
-      data['health'] = await getByCategory('health');
-      data['sport'] = await getByCategory('sport');
+      data['business'] = await getByCategory('business', "en-us");
+      data['scienceandtech'] =
+          await getByCategory('ScienceAndTechnology', "en-us");
+      data['health'] = await getByCategory('health', "en-us");
+      data['sports'] = await getByCategory('sports', "en-gb");
+      data["ussports"] = await getByCategory("sports", "en-us");
+      data["world"] = await getByCategory("world", "en-us");
+      data["products"] = await getByCategory("products", "en-us");
+      data["entertainment"] = await getByCategory("entertainment", "en-us");
+
       _categoryArticles = data;
     } catch (e) {
       throw e;
     }
+  }
+
+  List<Article> _mapBing(List data) {
+    final List<Article> loadedArticles = [];
+    data.forEach((article) {
+      loadedArticles.add(
+        Article(
+          provider: article['provider'][0]['name'],
+          description: article['description'],
+          publishedAt: DateTime.parse(article['datePublished']),
+          title: article['name'],
+          url: article['url'],
+          urlToImage: null,
+        ),
+      );
+    });
+    return loadedArticles;
   }
 
   List<Article> _mapArticle(List data) {

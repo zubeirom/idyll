@@ -19,13 +19,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   TabController _tabController;
   var _isInit = true;
   var _isLoading = false;
+  var _locale;
+
   List<Article> headlines;
   Map<String, List<Article>> categoryArticles = {
     'business': [],
-    'science': [],
-    'technology': [],
+    'scienceandtech': [],
     'health': [],
-    'sport': []
+    'sports': [],
+    'ussports': [],
+    'world': [],
+    'products': [],
+    'entertainment': [],
   };
 
   @override
@@ -47,9 +52,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _isLoading = true;
       });
 
+      Locale myLocale = Localizations.localeOf(context);
+
+      _locale = myLocale.countryCode;
+
       final newsProvider = Provider.of<News>(context, listen: false);
 
-      newsProvider.getHeadlines().then((_) {
+      newsProvider.getHeadlines(locale: _locale).then((_) {
         headlines = newsProvider.headlines;
         newsProvider.populateCategories().then((_) {
           categoryArticles = newsProvider.categoryArticles;
@@ -77,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       statusBarIconBrightness: Brightness.dark,
     ));
 
-    Provider.of<News>(context).getHeadlines();
+    Provider.of<News>(context).getHeadlines(locale: _locale);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -145,6 +154,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                       SizedBox(height: 25),
                       NewsList("Business", categoryArticles["business"]),
+                      SizedBox(height: 25),
+                      NewsList("Health", categoryArticles["health"]),
+                      SizedBox(height: 25),
+                      NewsList("Science and Tech",
+                          categoryArticles["scienceandtech"]),
+                      SizedBox(height: 25),
+                      NewsList("World", categoryArticles["world"]),
+                      SizedBox(height: 25),
+                      NewsList("Sports", categoryArticles["sports"]),
+                      SizedBox(height: 25),
+                      NewsList(
+                          "Entertainment", categoryArticles["entertainment"]),
+                      SizedBox(height: 25),
+                      NewsList("Products", categoryArticles["products"]),
+                      SizedBox(height: 25),
+                      NewsList("US Sports", categoryArticles["sports"]),
                     ],
                   ),
                 ),
