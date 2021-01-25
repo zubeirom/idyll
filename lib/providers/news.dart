@@ -4,21 +4,17 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class Article {
-  final String author;
-  final String content;
+  final String provider;
   final String description;
   final DateTime publishedAt;
-  final Map<String, dynamic> source;
   final String title;
   final String url;
   final String urlToImage;
 
   Article(
-      {@required this.author,
-      this.content,
-      @required this.description,
+      {@required this.description,
       @required this.publishedAt,
-      @required this.source,
+      @required this.provider,
       @required this.title,
       @required this.url,
       @required this.urlToImage});
@@ -37,10 +33,7 @@ class News with ChangeNotifier {
   };
 
   List<Article> get headlines {
-    if (_headlinesList.length > 10) {
-      return _headlinesList.sublist(0, 10);
-    }
-    return _headlinesList;
+    return [..._headlinesList];
   }
 
   Map<String, List<Article>> get categoryArticles {
@@ -89,10 +82,9 @@ class News with ChangeNotifier {
     data.forEach((article) {
       loadedArticles.add(
         Article(
-          author: article['author'],
+          provider: article['source']['name'],
           description: article['description'],
-          publishedAt: DateTime.now(), //DateTime.parse(article['publishedAt'])
-          source: article['source'],
+          publishedAt: DateTime.parse(article['publishedAt']),
           title: article['title'],
           url: article['url'],
           urlToImage: article['urlToImage'],

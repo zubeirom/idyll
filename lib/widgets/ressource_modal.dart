@@ -22,38 +22,21 @@ class RessourceModal extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Stack(children: [
-            Container(
-              height: 280,
-              width: double.infinity,
-              child: ClipRRect(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(15),
-                ),
-                child: Image.network(
-                  article.urlToImage,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: Column(children: [
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.bookmark_border_outlined),
-                      color: Colors.white,
-                      iconSize: 30,
-                      onPressed: () {},
-                    )
-                  ],
-                ),
-              ]),
-            )
-          ]),
+          article.urlToImage != null
+              ? Container(
+                  height: 280,
+                  width: double.infinity,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(15),
+                    ),
+                    child: Image.network(
+                      article.urlToImage,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : SizedBox(height: 1),
           Container(
             padding: EdgeInsets.all(20),
             child: Row(
@@ -85,6 +68,16 @@ class RessourceModal extends StatelessWidget {
                       backgroundColor: Color.fromRGBO(211, 211, 211, 100),
                       child: IconButton(
                         icon: FaIcon(FontAwesomeIcons.share),
+                        onPressed: () {},
+                        color: Colors.black,
+                        iconSize: 16,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    CircleAvatar(
+                      backgroundColor: Color.fromRGBO(211, 211, 211, 100),
+                      child: IconButton(
+                        icon: Icon(Icons.bookmark),
                         onPressed: () {},
                         color: Colors.black,
                         iconSize: 16,

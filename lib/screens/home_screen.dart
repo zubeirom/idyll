@@ -58,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           });
         });
       });
+      print(Localizations.localeOf(context).countryCode);
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -143,10 +144,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       ),
                       SizedBox(height: 25),
-                      NewsList(
-                        "Business",
-                        Util.sublist(categoryArticles["business"], 0, 8),
-                      )
+                      NewsList("Business", categoryArticles["business"]),
                     ],
                   ),
                 ),
