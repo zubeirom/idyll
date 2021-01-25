@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:idyll/providers/news.dart';
+import 'package:idyll/widgets/app_drawer.dart';
 import 'package:idyll/widgets/headline.dart';
 import 'package:idyll/widgets/image_link_list.dart';
 import 'package:idyll/widgets/regular_button.dart';
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   var _isInit = true;
   var _isLoading = false;
   var _locale;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<Article> headlines;
   Map<String, List<Article>> categoryArticles = {
@@ -67,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           });
         });
       });
-      print(Localizations.localeOf(context).countryCode);
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -86,45 +87,39 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       statusBarIconBrightness: Brightness.dark,
     ));
 
-    Provider.of<News>(context).getHeadlines(locale: _locale);
-
     return Scaffold(
+      drawerEnableOpenDragGesture: true,
       backgroundColor: Colors.white,
+      drawer: AppDrawer(),
       appBar: AppBar(
         brightness: Brightness.light,
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(211, 211, 211, 100),
-                borderRadius: BorderRadius.circular(15),
-              ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              icon: Icon(Icons.search, color: Colors.black),
+              onPressed: () => {},
+            ),
+          )
+        ],
+        leading: Builder(
+          builder: (BuildContext context) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 8.0),
               child: IconButton(
-                icon: Icon(Icons.sort),
-                color: Colors.black,
-                onPressed: () {},
+                icon: Icon(Icons.sort, color: Colors.black),
+                onPressed: () => Scaffold.of(context).openDrawer(),
               ),
-            ),
-            AutoSizeText(
-              'Idyll',
-              style: TextStyle(
-                  color: Colors.black, fontFamily: 'Plaster', fontSize: 24),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(211, 211, 211, 100),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: IconButton(
-                icon: Icon(Icons.search),
-                color: Colors.black,
-                onPressed: () {},
-              ),
-            ),
-          ],
+            );
+          },
+        ),
+        centerTitle: true,
+        title: AutoSizeText(
+          'Idyll',
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'Plaster', fontSize: 24),
         ),
       ),
       body: RefreshIndicator(
