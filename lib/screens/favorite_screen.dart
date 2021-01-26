@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:idyll/providers/favorite.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:idyll/widgets/app_drawer.dart';
@@ -121,19 +122,19 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                         child: TabBar(
                           tabs: [
                             Container(
-                              child: Icon(Icons.business_center_outlined),
+                              child: FaIcon(FontAwesomeIcons.newspaper),
                             ),
                             Container(
-                              child: Icon(Icons.wb_incandescent_outlined),
+                              child: FaIcon(FontAwesomeIcons.productHunt),
                             ),
                             Container(
-                              child: Icon(Icons.favorite_border_outlined),
+                              child: FaIcon(FontAwesomeIcons.youtube),
                             ),
                             Container(
-                              child: Icon(Icons.sports_basketball_outlined),
+                              child: FaIcon(FontAwesomeIcons.hackerNewsSquare),
                             ),
                             Container(
-                              child: Icon(Icons.devices_other_outlined),
+                              child: FaIcon(FontAwesomeIcons.github),
                             )
                           ],
                           unselectedLabelColor: const Color(0xffacb3bf),
