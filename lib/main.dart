@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:idyll/widgets/ressource_modal.dart';
+import 'package:idyll/providers/favorite.dart';
+import 'package:idyll/screens/favorite_screen.dart';
 import 'package:provider/provider.dart';
 import './screens/home_screen.dart';
 import 'providers/news.dart';
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
           value: News(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Favorite(),
         )
       ],
       child: MaterialApp(
@@ -24,7 +28,10 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.black,
         ),
         home: HomeScreen(),
-        routes: {},
+        routes: {
+          FavoriteScreen.routeName: (ctx) => FavoriteScreen(),
+          HomeScreen.routeName: (ctx) => HomeScreen(),
+        },
       ),
     );
   }

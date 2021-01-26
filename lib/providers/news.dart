@@ -18,6 +18,25 @@ class Article {
       @required this.title,
       @required this.url,
       @required this.urlToImage});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'provider': provider,
+      'description': description,
+      'publishedAt': publishedAt.toIso8601String(),
+      'title': title,
+      'url': url,
+      'urlToImage': urlToImage
+    };
+  }
+
+  Article.fromJson(Map<String, dynamic> json)
+      : provider = json['provider'],
+        description = json['description'],
+        title = json['title'],
+        url = json['url'],
+        urlToImage = json['urlToImage'],
+        publishedAt = DateTime.parse(json['publishedAt']);
 }
 
 class News with ChangeNotifier {

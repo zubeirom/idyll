@@ -1,9 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:idyll/providers/favorite.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:idyll/widgets/ressource_modal.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class NewsItem extends StatelessWidget {
   final Article article;

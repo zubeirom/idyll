@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:idyll/screens/favorite_screen.dart';
+import 'package:idyll/screens/home_screen.dart';
 import 'package:idyll/widgets/screen_header.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -22,7 +24,10 @@ class AppDrawer extends StatelessWidget {
                   ),
                 ],
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(FavoriteScreen.routeName);
+              },
             ),
             SizedBox(height: 30),
             InkWell(
@@ -33,7 +38,10 @@ class AppDrawer extends StatelessWidget {
                   FaIcon(FontAwesomeIcons.newspaper),
                 ],
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(HomeScreen.routeName);
+              },
             ),
             SizedBox(height: 30),
             InkWell(

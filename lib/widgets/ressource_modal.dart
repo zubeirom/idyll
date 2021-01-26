@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:idyll/providers/favorite.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:idyll/widgets/regular_button.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RessourceModal extends StatelessWidget {
@@ -78,7 +80,10 @@ class RessourceModal extends StatelessWidget {
                       backgroundColor: Color.fromRGBO(211, 211, 211, 100),
                       child: IconButton(
                         icon: Icon(Icons.bookmark),
-                        onPressed: () {},
+                        onPressed: () {
+                          Provider.of<Favorite>(context, listen: false)
+                              .addNewsArticle(article);
+                        },
                         color: Colors.black,
                         iconSize: 16,
                       ),

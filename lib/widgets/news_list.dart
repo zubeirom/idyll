@@ -16,22 +16,35 @@ class NewsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ScreenHeader(categoryTitle),
-              ],
-            ),
-            SizedBox(height: 15),
-            Column(
-                children:
-                    categoryList.map((article) => NewsItem(article)).toList()),
-          ],
-        ),
+        child: categoryList.isNotEmpty
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ScreenHeader(categoryTitle),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Column(
+                      children: categoryList
+                          .map((article) => NewsItem(article))
+                          .toList()),
+                ],
+              )
+            : Column(
+                children: [
+                  SizedBox(height: 40),
+                  ScreenHeader("Nothing was added..."),
+                  SizedBox(height: 20),
+                  Container(
+                      height: 200,
+                      child: Image.asset('assets/images/waiting.png',
+                          fit: BoxFit.cover))
+                ],
+              ),
       ),
     );
   }

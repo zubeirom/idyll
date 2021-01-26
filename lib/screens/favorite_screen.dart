@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:idyll/providers/favorite.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:idyll/widgets/app_drawer.dart';
 import 'package:idyll/widgets/headline.dart';
@@ -11,20 +12,19 @@ import '../util.dart';
 import '../widgets/news_list.dart';
 import '../widgets/screen_header.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const routeName = "/home";
+class FavoriteScreen extends StatefulWidget {
+  static const routeName = "/favorites";
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _FavoriteScreenState createState() => _FavoriteScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class _FavoriteScreenState extends State<FavoriteScreen>
+    with TickerProviderStateMixin {
   TabController _tabController;
   var _isInit = true;
   var _isLoading = false;
-  var _locale;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  List<Article> headlines;
+  List<Article> favoriteNews;
   Map<String, List<Article>> categoryArticles = {
     'business': [],
     'scienceandtech': [],
@@ -52,25 +52,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
-        _isLoading = true;
-      });
-
-      Locale myLocale = Localizations.localeOf(context);
-
-      _locale = myLocale.countryCode;
-
-      final newsProvider = Provider.of<News>(context, listen: false);
-
-      newsProvider.getHeadlines(locale: _locale).then((_) {
-        headlines = newsProvider.headlines;
-        newsProvider.populateCategories().then((_) {
-          categoryArticles = newsProvider.categoryArticles;
-          setState(() {
-            _isLoading = false;
-          });
-        });
+        _isLoading = false;
       });
     }
+    final favoritesProvider = Provider.of<Favorite>(context);
+
+    favoriteNews = favoritesProvider.newsArticles;
+    print(favoriteNews);
+
     _isInit = false;
     super.didChangeDependencies();
   }
@@ -117,11 +106,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           },
         ),
         centerTitle: true,
-        title: AutoSizeText(
-          'Idyll',
-          style: TextStyle(
-              color: Colors.black, fontFamily: 'Plaster', fontSize: 24),
-        ),
+        title: ScreenHeader('Favorites'),
       ),
       body: RefreshIndicator(
         onRefresh: () => _refreshPage(context),
@@ -138,34 +123,45 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 15),
-                      ScreenHeader('Headlines'),
-                      SizedBox(height: 15),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: headlines
-                              .map((article) => Headline(article))
-                              .toList(),
+                      Container(
+                        child: TabBar(
+                          tabs: [
+                            Container(
+                              child: Icon(Icons.business_center_outlined),
+                            ),
+                            Container(
+                              child: Icon(Icons.wb_incandescent_outlined),
+                            ),
+                            Container(
+                              child: Icon(Icons.favorite_border_outlined),
+                            ),
+                            Container(
+                              child: Icon(Icons.sports_basketball_outlined),
+                            ),
+                            Container(
+                              child: Icon(Icons.devices_other_outlined),
+                            )
+                          ],
+                          unselectedLabelColor: const Color(0xffacb3bf),
+                          labelColor: Colors.black,
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          isScrollable: false,
+                          controller: _tabController,
                         ),
                       ),
-                      SizedBox(height: 25),
-                      NewsList("Business", categoryArticles["business"]),
-                      SizedBox(height: 25),
-                      NewsList("Health", categoryArticles["health"]),
-                      SizedBox(height: 25),
-                      NewsList("Science and Tech",
-                          categoryArticles["scienceandtech"]),
-                      SizedBox(height: 25),
-                      NewsList("World", categoryArticles["world"]),
-                      SizedBox(height: 25),
-                      NewsList("Sports", categoryArticles["sports"]),
-                      SizedBox(height: 25),
-                      NewsList(
-                          "Entertainment", categoryArticles["entertainment"]),
-                      SizedBox(height: 25),
-                      NewsList("Products", categoryArticles["products"]),
-                      SizedBox(height: 25),
-                      NewsList("US Sports", categoryArticles["sports"]),
+                      Container(
+                        height: 700,
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: <Widget>[
+                            NewsList("News", favoriteNews),
+                            Text('c'),
+                            Text('c'),
+                            Text('c'),
+                            Text('c'),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
