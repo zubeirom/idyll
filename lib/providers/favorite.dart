@@ -25,7 +25,6 @@ class Favorite with ChangeNotifier {
           prefs.containsKey(NEWS) ? prefs.getStringList(NEWS) : [];
 
       _newsArticles = _mapToList(newsStringList);
-      print(_newsArticles);
       notifyListeners();
     } catch (e) {
       throw e;

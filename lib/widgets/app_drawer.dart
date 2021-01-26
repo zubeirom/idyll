@@ -25,8 +25,7 @@ class AppDrawer extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoriteScreen.routeName);
+                Navigator.of(context).popAndPushNamed(FavoriteScreen.routeName);
               },
             ),
             SizedBox(height: 30),

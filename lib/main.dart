@@ -6,33 +6,31 @@ import './screens/home_screen.dart';
 import 'providers/news.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => News()),
+        ChangeNotifierProvider(create: (context) => Favorite())
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: News(),
-        ),
-        ChangeNotifierProvider.value(
-          value: Favorite(),
-        )
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Idyll',
-        theme: ThemeData(
-          accentColor: Colors.black,
-        ),
-        home: HomeScreen(),
-        routes: {
-          FavoriteScreen.routeName: (ctx) => FavoriteScreen(),
-          HomeScreen.routeName: (ctx) => HomeScreen(),
-        },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Idyll',
+      theme: ThemeData(
+        accentColor: Colors.black,
       ),
+      home: HomeScreen(),
+      routes: {
+        FavoriteScreen.routeName: (ctx) => FavoriteScreen(),
+        HomeScreen.routeName: (ctx) => HomeScreen(),
+      },
     );
   }
 }

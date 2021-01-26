@@ -56,9 +56,8 @@ class _FavoriteScreenState extends State<FavoriteScreen>
       });
     }
     final favoritesProvider = Provider.of<Favorite>(context);
-
+    favoritesProvider.getNewsArticles();
     favoriteNews = favoritesProvider.newsArticles;
-    print(favoriteNews);
 
     _isInit = false;
     super.didChangeDependencies();
@@ -80,7 +79,6 @@ class _FavoriteScreenState extends State<FavoriteScreen>
     return Scaffold(
       drawerEnableOpenDragGesture: true,
       backgroundColor: Colors.white,
-      drawer: AppDrawer(),
       appBar: AppBar(
         brightness: Brightness.light,
         elevation: 0,
@@ -94,16 +92,12 @@ class _FavoriteScreenState extends State<FavoriteScreen>
             ),
           )
         ],
-        leading: Builder(
-          builder: (BuildContext context) {
-            return Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: IconButton(
-                icon: Icon(Icons.sort, color: Colors.black),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
-            );
-          },
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
         centerTitle: true,
         title: ScreenHeader('Favorites'),

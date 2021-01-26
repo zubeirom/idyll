@@ -32,6 +32,7 @@ class NewsList extends StatelessWidget {
                       children: categoryList
                           .map((article) => NewsItem(article))
                           .toList()),
+                  SizedBox(height: 40),
                 ],
               )
             : Column(
