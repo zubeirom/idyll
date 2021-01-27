@@ -49,7 +49,17 @@ class Favorite with ChangeNotifier {
     }
   }
 
-  List<Article> _mapToList(List<String> stringList) {
+  List<Article> getArticlesByType(String type) {
+    switch (type) {
+      case "news":
+        return _newsArticles;
+        break;
+      default:
+        return [];
+    }
+  }
+
+  List<Article> _mapToList(List stringList) {
     List<Article> articlesList = [];
 
     stringList.forEach((article) {

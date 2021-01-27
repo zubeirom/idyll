@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:idyll/widgets/app_drawer.dart';
 import 'package:idyll/widgets/headline.dart';
+import 'package:idyll/widgets/home_news_list.dart';
 import 'package:idyll/widgets/image_link_list.dart';
 import 'package:idyll/widgets/regular_button.dart';
 import 'package:provider/provider.dart';
@@ -149,16 +150,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       ),
                       SizedBox(height: 25),
-                      NewsList("Business", categoryArticles["business"]),
-                      NewsList("Health", categoryArticles["health"]),
-                      NewsList("Science and Tech",
+                      HomeNewsList("Business", categoryArticles["business"]),
+                      HomeNewsList("Health", categoryArticles["health"]),
+                      HomeNewsList("Science and Tech",
                           categoryArticles["scienceandtech"]),
-                      NewsList("World", categoryArticles["world"]),
-                      NewsList("Sports", categoryArticles["sports"]),
-                      NewsList(
+                      HomeNewsList("World", categoryArticles["world"]),
+                      HomeNewsList("Sports", categoryArticles["sports"]),
+                      HomeNewsList(
                           "Entertainment", categoryArticles["entertainment"]),
-                      NewsList("Products", categoryArticles["products"]),
-                      NewsList("US Sports", categoryArticles["sports"]),
+                      HomeNewsList("Products", categoryArticles["products"]),
+                      HomeNewsList("US Sports", categoryArticles["sports"]),
                     ],
                   ),
                 ),

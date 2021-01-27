@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:idyll/providers/favorite.dart';
-import 'package:provider/provider.dart';
+import 'package:idyll/providers/news.dart';
 import 'news_item.dart';
 import 'screen_header.dart';
 
-class NewsList extends StatelessWidget {
+class HomeNewsList extends StatelessWidget {
   final String categoryTitle;
-  final String categoryType;
+  final List<Article> categoryList;
 
-  NewsList(this.categoryTitle, this.categoryType);
+  HomeNewsList(this.categoryTitle, this.categoryList);
 
   @override
   Widget build(BuildContext context) {
-    final favoritesState = Provider.of<Favorite>(context);
-    final articles = favoritesState.newsArticles;
-
     return Container(
       child: SingleChildScrollView(
-        child: articles.isNotEmpty
+        child: categoryList.isNotEmpty
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -30,7 +26,7 @@ class NewsList extends StatelessWidget {
                   ),
                   SizedBox(height: 15),
                   Column(
-                      children: articles
+                      children: categoryList
                           .map((article) => NewsItem(article))
                           .toList()),
                   SizedBox(height: 40),
