@@ -137,7 +137,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                       child: TabBarView(
                         controller: _tabController,
                         children: <Widget>[
-                          NewsList("News", "news"),
+                          NewsList("News", "news", true),
                           Text('c'),
                           Text('c'),
                           Text('c'),

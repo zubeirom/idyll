@@ -7,8 +7,9 @@ import 'screen_header.dart';
 class NewsList extends StatelessWidget {
   final String categoryTitle;
   final String categoryType;
+  final bool isFavorite;
 
-  NewsList(this.categoryTitle, this.categoryType);
+  NewsList(this.categoryTitle, this.categoryType, this.isFavorite);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class NewsList extends StatelessWidget {
                   SizedBox(height: 15),
                   Column(
                       children: articles
-                          .map((article) => NewsItem(article))
+                          .map((article) => NewsItem(article, isFavorite))
                           .toList()),
                   SizedBox(height: 40),
                 ],

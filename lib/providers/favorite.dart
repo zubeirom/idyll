@@ -49,6 +49,23 @@ class Favorite with ChangeNotifier {
     }
   }
 
+  Future<void> deleteArticle(Article art) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      _newsArticles.removeWhere((article) =>
+          article.publishedAt.toString() == art.publishedAt.toString());
+      List<String> newList = toListString(_newsArticles);
+      prefs.setStringList(NEWS, [...newList]);
+      notifyListeners();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  List<String> toListString(List<Article> articles) {
+    return articles.map((article) => jsonEncode(article)).toList();
+  }
+
   List<Article> getArticlesByType(String type) {
     switch (type) {
       case "news":

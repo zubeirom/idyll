@@ -10,14 +10,16 @@ class Article {
   final String title;
   final String url;
   final String urlToImage;
+  bool isFavorite;
 
-  Article(
-      {@required this.description,
-      @required this.publishedAt,
-      @required this.provider,
-      @required this.title,
-      @required this.url,
-      @required this.urlToImage});
+  Article({
+    @required this.description,
+    @required this.publishedAt,
+    @required this.provider,
+    @required this.title,
+    @required this.url,
+    @required this.urlToImage,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -26,7 +28,7 @@ class Article {
       'publishedAt': publishedAt.toIso8601String(),
       'title': title,
       'url': url,
-      'urlToImage': urlToImage
+      'urlToImage': urlToImage,
     };
   }
 

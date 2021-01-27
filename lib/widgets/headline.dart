@@ -21,7 +21,7 @@ class Headline extends StatelessWidget {
       builder: (context) {
         return GestureDetector(
           onTap: () {},
-          child: RessourceModal(article),
+          child: RessourceModal(article, false),
           behavior: HitTestBehavior.opaque,
         );
       },

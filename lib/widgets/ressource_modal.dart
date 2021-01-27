@@ -9,7 +9,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class RessourceModal extends StatelessWidget {
   final Article article;
-  RessourceModal(this.article);
+  final bool isFavorite;
+
+  RessourceModal(this.article, this.isFavorite);
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -76,18 +78,32 @@ class RessourceModal extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 10),
-                    CircleAvatar(
-                      backgroundColor: Color.fromRGBO(211, 211, 211, 100),
-                      child: IconButton(
-                        icon: Icon(Icons.bookmark),
-                        onPressed: () {
-                          Provider.of<Favorite>(context, listen: false)
-                              .addNewsArticle(article);
-                        },
-                        color: Colors.black,
-                        iconSize: 16,
-                      ),
-                    )
+                    isFavorite
+                        ? CircleAvatar(
+                            backgroundColor: Color.fromRGBO(211, 211, 211, 100),
+                            child: IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Provider.of<Favorite>(context, listen: false)
+                                    .deleteArticle(article);
+                              },
+                              color: Colors.black,
+                              iconSize: 16,
+                            ),
+                          )
+                        : CircleAvatar(
+                            backgroundColor: Color.fromRGBO(211, 211, 211, 100),
+                            child: IconButton(
+                              icon: Icon(Icons.bookmark),
+                              onPressed: () {
+                                Provider.of<Favorite>(context, listen: false)
+                                    .addNewsArticle(article);
+                              },
+                              color: Colors.black,
+                              iconSize: 16,
+                            ),
+                          )
                   ],
                 ),
                 RegularButton("Read article", () {
