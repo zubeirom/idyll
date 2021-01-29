@@ -38,14 +38,17 @@ class NewsList extends StatelessWidget {
                 ],
               )
             : Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 40),
                   ScreenHeader("Nothing was added..."),
                   SizedBox(height: 20),
-                  Container(
-                      height: 200,
-                      child: Image.asset('assets/images/waiting.png',
-                          fit: BoxFit.cover))
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Container(
+                        height: 200,
+                        child: Image.asset('assets/images/waiting.png',
+                            fit: BoxFit.cover)),
+                  ])
                 ],
               ),
       ),

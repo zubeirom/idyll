@@ -109,7 +109,10 @@ class RessourceModal extends StatelessWidget {
                           )
                   ],
                 ),
-                RegularButton("Read article", () {
+                RegularButton(
+                    article.category == "YouTube"
+                        ? "View video"
+                        : "Read article", () {
                   _launchURL(article.url);
                 })
               ],
