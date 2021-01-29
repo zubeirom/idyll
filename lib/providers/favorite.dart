@@ -7,15 +7,21 @@ import 'news.dart';
 
 class Favorite with ChangeNotifier {
   static const NEWS = "news";
+  static const PH = "producthunt";
 
   Favorite() {
     getNewsArticles();
   }
 
   List<Article> _newsArticles = [];
+  List<Article> _productHunt = [];
 
   List<Article> get newsArticles {
     return [..._newsArticles];
+  }
+
+  List<Article> get productHunt {
+    return [..._productHunt];
   }
 
   Future<void> getNewsArticles() async {
@@ -33,16 +39,20 @@ class Favorite with ChangeNotifier {
 
   Future<void> addNewsArticle(Article article) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      var favoriteNews = [];
+      print(_ifExists(article));
+      if (!_ifExists(article)) {
+        final prefs = await SharedPreferences.getInstance();
+        var favoriteNews = [];
 
-      if (prefs.containsKey(NEWS)) {
-        favoriteNews = prefs.getStringList(NEWS);
+        if (prefs.containsKey(NEWS)) {
+          favoriteNews = prefs.getStringList(NEWS);
+        }
+
+        String encoded = jsonEncode(article);
+
+        prefs.setStringList(NEWS, [...favoriteNews, encoded]);
       }
 
-      String encoded = jsonEncode(article);
-
-      prefs.setStringList(NEWS, [...favoriteNews, encoded]);
       notifyListeners();
     } catch (e) {
       throw e;
@@ -60,6 +70,17 @@ class Favorite with ChangeNotifier {
     } catch (e) {
       throw e;
     }
+  }
+
+  bool _ifExists(Article article) {
+    bool res = false;
+    for (final element in _newsArticles) {
+      if (element.publishedAt == article.publishedAt) {
+        res = true;
+        break;
+      }
+    }
+    return res;
   }
 
   List<String> toListString(List<Article> articles) {

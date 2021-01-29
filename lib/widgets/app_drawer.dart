@@ -54,7 +54,7 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context)
-                    .pushReplacementNamed(ProductHuntScreen.routeName);
+                    .popAndPushNamed(ProductHuntScreen.routeName);
               },
             ),
             SizedBox(height: 30),

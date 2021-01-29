@@ -35,13 +35,13 @@ class ProductHunt with ChangeNotifier {
     data.forEach((article) {
       loadedArticles.add(
         Article(
-          provider: "Upvotes: " + article['votes_count'].toString(),
-          description: article['tagline'],
-          publishedAt: DateTime.parse(article['created_at']),
-          title: article['name'],
-          url: article['discussion_url'],
-          urlToImage: article['thumbnail']['image_url'],
-        ),
+            provider: "Upvotes: " + article['votes_count'].toString(),
+            description: article['tagline'],
+            publishedAt: DateTime.parse(article['created_at']),
+            title: article['name'],
+            url: article['discussion_url'],
+            urlToImage: article['thumbnail']['image_url'],
+            category: "Product Hunt"),
       );
     });
     return loadedArticles;

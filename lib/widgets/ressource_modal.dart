@@ -1,9 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:idyll/providers/favorite.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:idyll/widgets/regular_button.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,6 +27,7 @@ class RessourceModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           article.urlToImage != null
               ? Container(
@@ -112,7 +115,19 @@ class RessourceModal extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 5),
+          Container(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: AutoSizeText(
+              "${article.provider}  •  ${DateFormat('MMM.dd,yyyy').format(article.publishedAt)}  •  ${DateFormat.jm().format(article.publishedAt)}  •  ${article.category}",
+              style: GoogleFonts.domine(
+                textStyle: TextStyle(color: Colors.black, fontSize: 12),
+              ),
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+              minFontSize: 12,
+            ),
+          ),
+          SizedBox(height: 15),
           Container(
             padding: EdgeInsets.only(left: 20, right: 20),
             child: Text(

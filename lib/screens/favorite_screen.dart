@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -81,7 +82,11 @@ class _FavoriteScreenState extends State<FavoriteScreen>
           ),
         ),
         centerTitle: true,
-        title: ScreenHeader('Favorites'),
+        title: AutoSizeText(
+          'Idyll',
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'Plaster', fontSize: 24),
+        ),
       ),
       body: _isLoading
           ? Center(
@@ -95,46 +100,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 15),
-                    Container(
-                      child: TabBar(
-                        tabs: [
-                          Container(
-                            child: FaIcon(FontAwesomeIcons.newspaper),
-                          ),
-                          Container(
-                            child: FaIcon(FontAwesomeIcons.productHunt),
-                          ),
-                          Container(
-                            child: FaIcon(FontAwesomeIcons.youtube),
-                          ),
-                          Container(
-                            child: FaIcon(FontAwesomeIcons.hackerNewsSquare),
-                          ),
-                          Container(
-                            child: FaIcon(FontAwesomeIcons.github),
-                          )
-                        ],
-                        unselectedLabelColor: const Color(0xffacb3bf),
-                        labelColor: Colors.black,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        isScrollable: false,
-                        controller: _tabController,
-                      ),
-                    ),
-                    Container(
-                      height: 700,
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: <Widget>[
-                          NewsList("News", "news", true),
-                          Text('c'),
-                          Text('c'),
-                          Text('c'),
-                          Text('c'),
-                        ],
-                      ),
-                    ),
+                    NewsList("Favorites", "news", true),
                   ],
                 ),
               ),

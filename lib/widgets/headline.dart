@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:intl/intl.dart';
 
-import 'news_item.dart';
 import 'ressource_modal.dart';
 
 class Headline extends StatelessWidget {

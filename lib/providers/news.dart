@@ -11,15 +11,16 @@ class Article {
   final String url;
   final String urlToImage;
   bool isFavorite;
+  final String category;
 
-  Article({
-    @required this.description,
-    @required this.publishedAt,
-    @required this.provider,
-    @required this.title,
-    @required this.url,
-    @required this.urlToImage,
-  });
+  Article(
+      {@required this.description,
+      @required this.publishedAt,
+      @required this.provider,
+      @required this.title,
+      @required this.url,
+      @required this.urlToImage,
+      @required this.category});
 
   Map<String, dynamic> toJson() {
     return {
@@ -29,6 +30,7 @@ class Article {
       'title': title,
       'url': url,
       'urlToImage': urlToImage,
+      'category': category
     };
   }
 
@@ -38,7 +40,8 @@ class Article {
         title = json['title'],
         url = json['url'],
         urlToImage = json['urlToImage'],
-        publishedAt = DateTime.parse(json['publishedAt']);
+        publishedAt = DateTime.parse(json['publishedAt']),
+        category = json['category'];
 }
 
 class News with ChangeNotifier {
@@ -108,13 +111,13 @@ class News with ChangeNotifier {
     data.forEach((article) {
       loadedArticles.add(
         Article(
-          provider: article['provider'][0]['name'],
-          description: article['description'],
-          publishedAt: DateTime.parse(article['datePublished']),
-          title: article['name'],
-          url: article['url'],
-          urlToImage: null,
-        ),
+            provider: article['provider'][0]['name'],
+            description: article['description'],
+            publishedAt: DateTime.parse(article['datePublished']),
+            title: article['name'],
+            url: article['url'],
+            urlToImage: null,
+            category: "News"),
       );
     });
     return loadedArticles;
@@ -125,13 +128,13 @@ class News with ChangeNotifier {
     data.forEach((article) {
       loadedArticles.add(
         Article(
-          provider: article['source']['name'],
-          description: article['description'],
-          publishedAt: DateTime.parse(article['publishedAt']),
-          title: article['title'],
-          url: article['url'],
-          urlToImage: article['urlToImage'],
-        ),
+            provider: article['source']['name'],
+            description: article['description'],
+            publishedAt: DateTime.parse(article['publishedAt']),
+            title: article['title'],
+            url: article['url'],
+            urlToImage: article['urlToImage'],
+            category: "News"),
       );
     });
     return loadedArticles;
