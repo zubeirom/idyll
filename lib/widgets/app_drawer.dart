@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:idyll/screens/favorite_screen.dart';
 import 'package:idyll/screens/home_screen.dart';
 import 'package:idyll/screens/producthunt_screen.dart';
+import 'package:idyll/screens/reddit_screen.dart';
 import 'package:idyll/screens/youtube_screen.dart';
 import 'package:idyll/widgets/screen_header.dart';
 
@@ -36,7 +37,10 @@ class AppDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ScreenHeader('News'),
-                  FaIcon(FontAwesomeIcons.newspaper),
+                  FaIcon(
+                    FontAwesomeIcons.newspaper,
+                    size: 23,
+                  ),
                 ],
               ),
               onTap: () {
@@ -63,8 +67,21 @@ class AppDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  ScreenHeader('Reddit'),
+                  FaIcon(FontAwesomeIcons.reddit),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).popAndPushNamed(RedditScreen.routeName);
+              },
+            ),
+            SizedBox(height: 30),
+            InkWell(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   ScreenHeader('Youtube'),
-                  FaIcon(FontAwesomeIcons.youtube),
+                  FaIcon(FontAwesomeIcons.youtube, size: 23),
                 ],
               ),
               onTap: () {
