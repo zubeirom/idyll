@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:idyll/screens/favorite_screen.dart';
 import 'package:idyll/screens/home_screen.dart';
+import 'package:idyll/screens/producthunt_screen.dart';
 import 'package:idyll/widgets/screen_header.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -51,7 +52,10 @@ class AppDrawer extends StatelessWidget {
                   FaIcon(FontAwesomeIcons.productHunt),
                 ],
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(ProductHuntScreen.routeName);
+              },
             ),
             SizedBox(height: 30),
             InkWell(

@@ -20,16 +20,6 @@ class _FavoriteScreenState extends State<FavoriteScreen>
   var _isLoading = false;
 
   List<Article> favoriteNews;
-  Map<String, List<Article>> categoryArticles = {
-    'business': [],
-    'scienceandtech': [],
-    'health': [],
-    'sports': [],
-    'ussports': [],
-    'world': [],
-    'products': [],
-    'entertainment': [],
-  };
 
   @override
   void initState() {
