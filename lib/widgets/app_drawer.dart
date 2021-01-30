@@ -103,17 +103,6 @@ class AppDrawer extends StatelessWidget {
                     .popAndPushNamed(HackerNewsScreen.routeName);
               },
             ),
-            SizedBox(height: 30),
-            InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ScreenHeader('GitHub'),
-                  FaIcon(FontAwesomeIcons.github),
-                ],
-              ),
-              onTap: () {},
-            ),
           ],
         ),
       ),

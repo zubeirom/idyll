@@ -41,6 +41,7 @@ class Favorite with ChangeNotifier {
     try {
       print(_ifExists(article));
       if (!_ifExists(article)) {
+        _newsArticles.add(article);
         final prefs = await SharedPreferences.getInstance();
         var favoriteNews = [];
 
@@ -75,7 +76,7 @@ class Favorite with ChangeNotifier {
   bool _ifExists(Article article) {
     bool res = false;
     for (final element in _newsArticles) {
-      if (element.publishedAt == article.publishedAt) {
+      if (element.url == article.url) {
         res = true;
         break;
       }

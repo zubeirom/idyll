@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:idyll/providers/favorite.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:provider/provider.dart';
-import '../widgets/news_list.dart';
+import '../widgets/favorite_news_list.dart';
 
 class FavoriteScreen extends StatefulWidget {
   static const routeName = "/favorites";
@@ -98,7 +98,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    NewsList("Favorites", "news", true),
+                    FavoriteNewsList("Favorites", "news", true),
                   ],
                 ),
               ),

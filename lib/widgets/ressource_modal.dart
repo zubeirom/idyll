@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -87,9 +88,60 @@ class RessourceModal extends StatelessWidget {
                             child: IconButton(
                               icon: Icon(Icons.delete),
                               onPressed: () {
-                                Navigator.pop(context);
-                                Provider.of<Favorite>(context, listen: false)
-                                    .deleteArticle(article);
+                                showDialog(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    title: Text(
+                                      'Are you sure?',
+                                      style: GoogleFonts.openSans(
+                                        textStyle: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    content: Text(
+                                      'Do you want to remove the article from your favorites?',
+                                      style: GoogleFonts.openSans(),
+                                    ),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text(
+                                          'No',
+                                          style: GoogleFonts.openSans(
+                                            textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(ctx).pop(false);
+                                        },
+                                      ),
+                                      FlatButton(
+                                        child: Text(
+                                          'Yes',
+                                          style: GoogleFonts.openSans(
+                                            textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(ctx).pop(true);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ).then((val) {
+                                  if (val) {
+                                    Provider.of<Favorite>(context,
+                                            listen: false)
+                                        .deleteArticle(article);
+                                    Navigator.of(context).pop();
+                                  }
+                                });
                               },
                               color: Colors.black,
                               iconSize: 16,
@@ -102,6 +154,39 @@ class RessourceModal extends StatelessWidget {
                               onPressed: () {
                                 Provider.of<Favorite>(context, listen: false)
                                     .addNewsArticle(article);
+
+                                Flushbar(
+                                  animationDuration:
+                                      Duration(milliseconds: 500),
+                                  borderRadius: 8,
+                                  messageText: AutoSizeText(
+                                    'Added article to favorites!',
+                                    style: GoogleFonts.domine(
+                                      textStyle: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  mainButton: FlatButton(
+                                    child: AutoSizeText(
+                                      'Undo',
+                                      style: GoogleFonts.domine(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<Favorite>(context,
+                                              listen: false)
+                                          .deleteArticle(article);
+                                    },
+                                  ),
+                                  duration: Duration(seconds: 2),
+                                )..show(context);
                               },
                               color: Colors.black,
                               iconSize: 16,
