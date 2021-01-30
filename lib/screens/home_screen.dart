@@ -5,12 +5,9 @@ import 'package:idyll/providers/news.dart';
 import 'package:idyll/widgets/app_drawer.dart';
 import 'package:idyll/widgets/headline.dart';
 import 'package:idyll/widgets/home_news_list.dart';
-import 'package:idyll/widgets/image_link_list.dart';
-import 'package:idyll/widgets/regular_button.dart';
 import 'package:provider/provider.dart';
-import '../util.dart';
-import '../widgets/news_list.dart';
 import '../widgets/screen_header.dart';
+import './search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
@@ -102,7 +99,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               icon: Icon(Icons.search, color: Colors.black),
-              onPressed: () => {},
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(SearchScreen.routeName),
             ),
           )
         ],

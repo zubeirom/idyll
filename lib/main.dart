@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 import './screens/home_screen.dart';
 import 'providers/news.dart';
 import 'providers/producthunt.dart';
+import 'screens/search_screen.dart';
+import 'providers/query.dart';
 
 void main() {
   runApp(
@@ -23,6 +25,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => Youtube()),
         ChangeNotifierProvider(create: (context) => Reddit()),
         ChangeNotifierProvider(create: (context) => HackerNews()),
+        ChangeNotifierProvider(create: (context) => Query()),
       ],
       child: MyApp(),
     ),
@@ -45,7 +48,8 @@ class MyApp extends StatelessWidget {
         ProductHuntScreen.routeName: (ctx) => ProductHuntScreen(),
         YoutubeScreen.routeName: (ctx) => YoutubeScreen(),
         RedditScreen.routeName: (ctx) => RedditScreen(),
-        HackerNewsScreen.routeName: (ctx) => HackerNewsScreen()
+        HackerNewsScreen.routeName: (ctx) => HackerNewsScreen(),
+        SearchScreen.routeName: (ctx) => SearchScreen()
       },
     );
   }
