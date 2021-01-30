@@ -36,7 +36,7 @@ class HackerNews with ChangeNotifier {
       loadedArticles.add(
         Article(
             provider: "Comments: " + Numeral(article['comments_count']).value(),
-            description: "none",
+            description: "",
             publishedAt: DateTime.fromMicrosecondsSinceEpoch(article['time']),
             title: article['title'],
             url: article['url'],
