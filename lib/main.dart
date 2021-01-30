@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:idyll/providers/favorite.dart';
+import 'package:idyll/providers/hackernews.dart';
 import 'package:idyll/providers/reddit.dart';
 import 'package:idyll/providers/youtube.dart';
 import 'package:idyll/screens/favorite_screen.dart';
+import 'package:idyll/screens/hackernews_screen.dart';
 import 'package:idyll/screens/producthunt_screen.dart';
 import 'package:idyll/screens/reddit_screen.dart';
 import 'package:idyll/screens/youtube_screen.dart';
@@ -20,6 +22,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => ProductHunt()),
         ChangeNotifierProvider(create: (context) => Youtube()),
         ChangeNotifierProvider(create: (context) => Reddit()),
+        ChangeNotifierProvider(create: (context) => HackerNews()),
       ],
       child: MyApp(),
     ),
@@ -41,7 +44,8 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (ctx) => HomeScreen(),
         ProductHuntScreen.routeName: (ctx) => ProductHuntScreen(),
         YoutubeScreen.routeName: (ctx) => YoutubeScreen(),
-        RedditScreen.routeName: (ctx) => RedditScreen()
+        RedditScreen.routeName: (ctx) => RedditScreen(),
+        HackerNewsScreen.routeName: (ctx) => HackerNewsScreen()
       },
     );
   }

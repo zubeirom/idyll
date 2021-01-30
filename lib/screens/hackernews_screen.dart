@@ -1,47 +1,34 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:idyll/providers/favorite.dart';
+import 'package:idyll/providers/hackernews.dart';
 import 'package:idyll/providers/news.dart';
+import 'package:idyll/widgets/news_item.dart';
+import 'package:idyll/widgets/screen_header.dart';
 import 'package:provider/provider.dart';
-import '../widgets/news_list.dart';
 
-class FavoriteScreen extends StatefulWidget {
-  static const routeName = "/favorites";
+class HackerNewsScreen extends StatefulWidget {
+  static const routeName = "/hackernews";
   @override
-  _FavoriteScreenState createState() => _FavoriteScreenState();
+  _HackerNewsScreenState createState() => _HackerNewsScreenState();
 }
 
-class _FavoriteScreenState extends State<FavoriteScreen>
-    with TickerProviderStateMixin {
-  TabController _tabController;
-  var _isInit = true;
+class _HackerNewsScreenState extends State<HackerNewsScreen> {
   var _isLoading = false;
-
-  List<Article> favoriteNews;
-
-  @override
-  void initState() {
-    _tabController = TabController(length: 5, vsync: this);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+  var _isInit = true;
+  List<Article> articles;
 
   @override
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
         _isLoading = true;
-        Provider.of<Favorite>(context).getNewsArticles().then((_) {
-          setState(() {
-            _isLoading = false;
-          });
+      });
+      final hackernews = Provider.of<HackerNews>(context);
+      hackernews.getNewsArticles().then((_) {
+        setState(() {
+          _isLoading = false;
         });
+        articles = hackernews.newsArticles;
       });
     }
 
@@ -80,11 +67,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
           ),
         ),
         centerTitle: true,
-        title: AutoSizeText(
-          'Idyll',
-          style: TextStyle(
-              color: Colors.black, fontFamily: 'Plaster', fontSize: 24),
-        ),
+        title: ScreenHeader('Hacker News'),
       ),
       body: _isLoading
           ? Center(
@@ -98,7 +81,17 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    NewsList("Favorites", "news", true),
+                    SizedBox(height: 15),
+                    Container(
+                      child: ScreenHeader("Trending"),
+                    ),
+                    SizedBox(height: 30),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: articles
+                          .map((article) => NewsItem(article, false))
+                          .toList(),
+                    )
                   ],
                 ),
               ),

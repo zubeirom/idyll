@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:idyll/screens/favorite_screen.dart';
+import 'package:idyll/screens/hackernews_screen.dart';
 import 'package:idyll/screens/home_screen.dart';
 import 'package:idyll/screens/producthunt_screen.dart';
 import 'package:idyll/screens/reddit_screen.dart';
@@ -97,7 +98,10 @@ class AppDrawer extends StatelessWidget {
                   FaIcon(FontAwesomeIcons.hackerNewsSquare),
                 ],
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context)
+                    .popAndPushNamed(HackerNewsScreen.routeName);
+              },
             ),
             SizedBox(height: 30),
             InkWell(
