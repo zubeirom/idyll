@@ -12,100 +12,118 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: Center(
-      child: Padding(
-        padding: const EdgeInsets.all(40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ScreenHeader('Favorites'),
-                  FaIcon(
-                    FontAwesomeIcons.bookmark,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(40),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ScreenHeader('Favorites'),
+                      FaIcon(
+                        FontAwesomeIcons.bookmark,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context).popAndPushNamed(FavoriteScreen.routeName);
-              },
-            ),
-            SizedBox(height: 30),
-            InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ScreenHeader('News'),
-                  FaIcon(
-                    FontAwesomeIcons.newspaper,
-                    size: 23,
+                  onTap: () {
+                    Navigator.of(context)
+                        .popAndPushNamed(FavoriteScreen.routeName);
+                  },
+                ),
+                SizedBox(height: 25),
+                InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ScreenHeader('News'),
+                      FaIcon(
+                        FontAwesomeIcons.newspaper,
+                        size: 23,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed(HomeScreen.routeName);
-              },
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(HomeScreen.routeName);
+                  },
+                ),
+                SizedBox(height: 25),
+                InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ScreenHeader('Product Hunt'),
+                      FaIcon(FontAwesomeIcons.productHunt),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context)
+                        .popAndPushNamed(ProductHuntScreen.routeName);
+                  },
+                ),
+                SizedBox(height: 25),
+                InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ScreenHeader('Reddit'),
+                      FaIcon(FontAwesomeIcons.reddit),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context)
+                        .popAndPushNamed(RedditScreen.routeName);
+                  },
+                ),
+                SizedBox(height: 25),
+                InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ScreenHeader('Youtube'),
+                      FaIcon(FontAwesomeIcons.youtube, size: 23),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context)
+                        .popAndPushNamed(YoutubeScreen.routeName);
+                  },
+                ),
+                SizedBox(height: 25),
+                InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ScreenHeader('Hacker News'),
+                      FaIcon(FontAwesomeIcons.hackerNewsSquare),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context)
+                        .popAndPushNamed(HackerNewsScreen.routeName);
+                  },
+                ),
+                SizedBox(height: 25),
+                FlatButton(
+                  child: Text(
+                    'Privacy Policy',
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.black),
+                  ),
+                  onPressed: () {},
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                ),
+              ],
             ),
-            SizedBox(height: 30),
-            InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ScreenHeader('Product Hunt'),
-                  FaIcon(FontAwesomeIcons.productHunt),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context)
-                    .popAndPushNamed(ProductHuntScreen.routeName);
-              },
-            ),
-            SizedBox(height: 30),
-            InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ScreenHeader('Reddit'),
-                  FaIcon(FontAwesomeIcons.reddit),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context).popAndPushNamed(RedditScreen.routeName);
-              },
-            ),
-            SizedBox(height: 30),
-            InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ScreenHeader('Youtube'),
-                  FaIcon(FontAwesomeIcons.youtube, size: 23),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context).popAndPushNamed(YoutubeScreen.routeName);
-              },
-            ),
-            SizedBox(height: 30),
-            InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ScreenHeader('Hacker News'),
-                  FaIcon(FontAwesomeIcons.hackerNewsSquare),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context)
-                    .popAndPushNamed(HackerNewsScreen.routeName);
-              },
-            ),
-          ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }
