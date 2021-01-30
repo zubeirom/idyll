@@ -77,9 +77,10 @@ class News with ChangeNotifier {
 
   Future<List<Article>> getByCategory(String category, String locale) async {
     try {
-      final res = await http.get(BASE_URL + '/news?category=$category');
+      final res =
+          await http.get(BASE_URL + '/category?value=$category&mkt=$locale');
       final extractData = json.decode(res.body) as Map<String, dynamic>;
-      final list = _mapArticle(extractData['articles']);
+      final list = _mapBing(extractData['value']);
       notifyListeners();
       return list;
     } catch (e) {
