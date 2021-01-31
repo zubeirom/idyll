@@ -1,4 +1,4 @@
-package com.example.idyll
+package dev.zubeirtech.idyll
 
 import io.flutter.embedding.android.FlutterActivity
 
