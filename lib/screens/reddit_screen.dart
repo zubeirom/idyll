@@ -25,7 +25,7 @@ class _RedditScreenState extends State<RedditScreen> {
       setState(() {
         _isLoading = true;
       });
-      final reddit = Provider.of<Reddit>(context);
+      final reddit = Provider.of<Reddit>(context, listen: false);
       reddit.getNewsArticles().then((_) {
         setState(() {
           _isLoading = false;

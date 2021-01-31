@@ -25,7 +25,7 @@ class _ProductHuntScreenState extends State<ProductHuntScreen> {
       setState(() {
         _isLoading = true;
       });
-      final productHunt = Provider.of<ProductHunt>(context);
+      final productHunt = Provider.of<ProductHunt>(context, listen: false);
       productHunt.getNewsArticles().then((_) {
         setState(() {
           _isLoading = false;

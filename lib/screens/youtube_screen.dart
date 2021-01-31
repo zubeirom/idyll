@@ -25,7 +25,7 @@ class _YoutubeScreenState extends State<YoutubeScreen> {
       setState(() {
         _isLoading = true;
       });
-      final youtube = Provider.of<Youtube>(context);
+      final youtube = Provider.of<Youtube>(context, listen: false);
       youtube.getNewsArticles().then((_) {
         setState(() {
           _isLoading = false;

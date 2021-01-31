@@ -25,7 +25,7 @@ class _HackerNewsScreenState extends State<HackerNewsScreen> {
       setState(() {
         _isLoading = true;
       });
-      final hackernews = Provider.of<HackerNews>(context);
+      final hackernews = Provider.of<HackerNews>(context, listen: false);
       hackernews.getNewsArticles().then((_) {
         setState(() {
           _isLoading = false;

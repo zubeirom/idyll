@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:idyll/providers/favorite.dart';
 import 'package:idyll/providers/hackernews.dart';
 import 'package:idyll/providers/reddit.dart';
@@ -20,6 +21,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+    systemNavigationBarColor: Colors.black,
+  ));
   runApp(
     MultiProvider(
       providers: [
