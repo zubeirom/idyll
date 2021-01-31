@@ -211,7 +211,6 @@ class RessourceModal extends StatelessWidget {
                 textStyle: TextStyle(color: Colors.black, fontSize: 12),
               ),
               softWrap: true,
-              overflow: TextOverflow.ellipsis,
               minFontSize: 12,
             ),
           ),

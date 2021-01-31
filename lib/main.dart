@@ -13,6 +13,7 @@ import './screens/home_screen.dart';
 import 'providers/news.dart';
 import 'providers/producthunt.dart';
 import 'screens/search_screen.dart';
+import 'screens/query_screen.dart';
 import 'providers/query.dart';
 
 void main() {
@@ -49,7 +50,8 @@ class MyApp extends StatelessWidget {
         YoutubeScreen.routeName: (ctx) => YoutubeScreen(),
         RedditScreen.routeName: (ctx) => RedditScreen(),
         HackerNewsScreen.routeName: (ctx) => HackerNewsScreen(),
-        SearchScreen.routeName: (ctx) => SearchScreen()
+        SearchScreen.routeName: (ctx) => SearchScreen(),
+        QueryScreen.routeName: (ctx) => QueryScreen()
       },
     );
   }

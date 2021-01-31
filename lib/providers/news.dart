@@ -56,6 +56,12 @@ class News with ChangeNotifier {
     'sport': []
   };
 
+  List<Article> _searchResults = [];
+
+  List<Article> get searchResults {
+    return [..._searchResults];
+  }
+
   List<Article> get headlines {
     return [..._headlinesList];
   }
@@ -64,11 +70,12 @@ class News with ChangeNotifier {
     return {..._categoryArticles};
   }
 
-  Future<void> getHeadlines({String locale = "us"}) async {
+  Future<void> getHeadlines({String locale = "en-us"}) async {
     try {
       final res = await http.get(BASE_URL + '/news?locale=$locale');
       final extractData = json.decode(res.body) as Map<String, dynamic>;
-      _headlinesList = _mapArticle(extractData['articles']);
+
+      _headlinesList = _mapArticle(extractData['value']);
       notifyListeners();
     } catch (e) {
       print(e);
@@ -91,17 +98,28 @@ class News with ChangeNotifier {
   Future<void> populateCategories() async {
     try {
       Map<String, List<Article>> data = {};
-      data['business'] = await getByCategory('business', "en-us");
-      data['scienceandtech'] =
-          await getByCategory('ScienceAndTechnology', "en-us");
-      data['health'] = await getByCategory('health', "en-us");
-      data['sports'] = await getByCategory('sports', "en-gb");
-      data["ussports"] = await getByCategory("sports", "en-us");
-      data["world"] = await getByCategory("world", "en-us");
-      data["products"] = await getByCategory("products", "en-us");
-      data["entertainment"] = await getByCategory("entertainment", "en-us");
+      data['business'] = []; // await getByCategory('business', "en-us");
+      data['scienceandtech'] = [];
+      // await getByCategory('ScienceAndTechnology', "en-us");
+      data['health'] = []; // await getByCategory('health', "en-us");
+      data['sports'] = []; // await getByCategory('sports', "en-gb");
+      data["ussports"] = []; //await getByCategory("sports", "en-us");
+      data["world"] = []; //await getByCategory("world", "en-us");
+      data["products"] = []; // await getByCategory("products", "en-us");
+      data["entertainment"] = [];
+      //await getByCategory("entertainment", "en-us");
 
       _categoryArticles = data;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<List<Article>> getFromQuery(String query) async {
+    try {
+      final res = await http.get(BASE_URL + '/search?q=$query');
+      final extractData = json.decode(res.body) as Map<String, dynamic>;
+      return _mapBing(extractData['value']);
     } catch (e) {
       throw e;
     }
@@ -127,16 +145,18 @@ class News with ChangeNotifier {
   List<Article> _mapArticle(List data) {
     final List<Article> loadedArticles = [];
     data.forEach((article) {
-      loadedArticles.add(
-        Article(
-            provider: article['source']['name'],
-            description: article['description'],
-            publishedAt: DateTime.parse(article['publishedAt']),
-            title: article['title'],
-            url: article['url'],
-            urlToImage: article['urlToImage'],
-            category: "News"),
-      );
+      if (article['image'] != null) {
+        loadedArticles.add(
+          Article(
+              provider: article['provider'][0]['name'],
+              description: article['description'],
+              publishedAt: DateTime.parse(article['datePublished']),
+              title: article['name'],
+              url: article['url'],
+              urlToImage: article['image']['contentUrl'],
+              category: "News"),
+        );
+      }
     });
     return loadedArticles;
   }

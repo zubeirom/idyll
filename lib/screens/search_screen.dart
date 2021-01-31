@@ -5,6 +5,7 @@ import 'package:idyll/providers/query.dart';
 import 'package:idyll/widgets/screen_header.dart';
 import 'package:provider/provider.dart';
 import '../widgets/query_list.dart';
+import './query_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   static const routeName = "/search";
@@ -44,7 +45,10 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _handleSubmitted(String val) {
+    print(val);
     Provider.of<Query>(context, listen: false).addQuery(val.trim()).then((_) {
+      Navigator.of(context)
+          .popAndPushNamed(QueryScreen.routeName, arguments: val.trim());
       _clearSearchQuery();
     });
   }

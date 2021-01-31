@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   TabController _tabController;
   var _isInit = true;
   var _isLoading = false;
-  var _locale;
+  String _locale;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<Article> headlines;
@@ -55,11 +55,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
       Locale myLocale = Localizations.localeOf(context);
 
-      _locale = myLocale.countryCode;
+      _locale = myLocale.languageCode + "-" + myLocale.countryCode;
 
       final newsProvider = Provider.of<News>(context, listen: false);
 
-      newsProvider.getHeadlines(locale: _locale).then((_) {
+      newsProvider.getHeadlines(locale: _locale.toLowerCase()).then((_) {
         headlines = newsProvider.headlines;
         newsProvider.populateCategories().then((_) {
           categoryArticles = newsProvider.categoryArticles;
