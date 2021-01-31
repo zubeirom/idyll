@@ -58,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       _locale = myLocale.languageCode + "-" + myLocale.countryCode;
 
       final newsProvider = Provider.of<News>(context, listen: false);
+      print(_locale);
 
       newsProvider.getHeadlines(locale: _locale.toLowerCase()).then((_) {
         headlines = newsProvider.headlines;

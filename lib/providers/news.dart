@@ -98,16 +98,15 @@ class News with ChangeNotifier {
   Future<void> populateCategories() async {
     try {
       Map<String, List<Article>> data = {};
-      data['business'] = []; // await getByCategory('business', "en-us");
-      data['scienceandtech'] = [];
-      // await getByCategory('ScienceAndTechnology', "en-us");
-      data['health'] = []; // await getByCategory('health', "en-us");
-      data['sports'] = []; // await getByCategory('sports', "en-gb");
-      data["ussports"] = []; //await getByCategory("sports", "en-us");
-      data["world"] = []; //await getByCategory("world", "en-us");
-      data["products"] = []; // await getByCategory("products", "en-us");
-      data["entertainment"] = [];
-      //await getByCategory("entertainment", "en-us");
+      data['business'] = await getByCategory('business', "en-us");
+      data['scienceandtech'] =
+          await getByCategory('ScienceAndTechnology', "en-us");
+      data['health'] = await getByCategory('health', "en-us");
+      data['sports'] = await getByCategory('sports', "en-gb");
+      data["ussports"] = await getByCategory("sports", "en-us");
+      data["world"] = await getByCategory("world", "en-us");
+      data["products"] = await getByCategory("products", "en-us");
+      data["entertainment"] = await getByCategory("entertainment", "en-us");
 
       _categoryArticles = data;
     } catch (e) {

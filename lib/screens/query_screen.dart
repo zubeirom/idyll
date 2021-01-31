@@ -52,7 +52,7 @@ class _QueryScreenState extends State<QueryScreen> {
             child: IconButton(
               icon: Icon(Icons.search, color: Colors.black),
               onPressed: () =>
-                  Navigator.of(context).pushNamed(SearchScreen.routeName),
+                  Navigator.of(context).popAndPushNamed(SearchScreen.routeName),
             ),
           )
         ],

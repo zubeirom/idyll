@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter  
   auto_size_text: ^2.1.0
   google_fonts: ^1.1.1
   provider: ^4.3.3
