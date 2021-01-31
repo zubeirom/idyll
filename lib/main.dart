@@ -14,6 +14,7 @@ import 'providers/news.dart';
 import 'providers/producthunt.dart';
 import 'screens/search_screen.dart';
 import 'screens/query_screen.dart';
+import 'screens/privacy_policy_screen.dart';
 import 'providers/query.dart';
 
 void main() {
@@ -51,7 +52,8 @@ class MyApp extends StatelessWidget {
         RedditScreen.routeName: (ctx) => RedditScreen(),
         HackerNewsScreen.routeName: (ctx) => HackerNewsScreen(),
         SearchScreen.routeName: (ctx) => SearchScreen(),
-        QueryScreen.routeName: (ctx) => QueryScreen()
+        QueryScreen.routeName: (ctx) => QueryScreen(),
+        PrivacyPolicyScreen.routeName: (ctx) => PrivacyPolicyScreen()
       },
     );
   }

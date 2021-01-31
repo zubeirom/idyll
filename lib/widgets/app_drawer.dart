@@ -7,6 +7,7 @@ import 'package:idyll/screens/producthunt_screen.dart';
 import 'package:idyll/screens/reddit_screen.dart';
 import 'package:idyll/screens/youtube_screen.dart';
 import 'package:idyll/widgets/screen_header.dart';
+import 'package:idyll/screens/privacy_policy_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -115,7 +116,10 @@ class AppDrawer extends StatelessWidget {
                         decoration: TextDecoration.underline,
                         color: Colors.black),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .popAndPushNamed(PrivacyPolicyScreen.routeName);
+                  },
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                 ),
