@@ -37,6 +37,8 @@ dependencies:
   flushbar: ^1.10.4
   share: ^0.6.5+4
   social_share: ^2.0.5
+  firebase_core: ^0.7.0
+  firebase_crashlytics: ^0.4.0+1
 
 
 

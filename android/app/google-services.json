@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "424615186612",
+    "firebase_url": "https://myidyll.firebaseio.com",
+    "project_id": "myidyll",
+    "storage_bucket": "myidyll.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424615186612:android:dfaff1468e16be3dbb07e1",
+        "android_client_info": {
+          "package_name": "dev.zubeirtech.idyll"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424615186612-sjqqsa9fe6p7p3ucdr69n93pt44ou8vh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmOPFCKnBhIbF_2tp2_1mOzffogRxX7Eo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424615186612-sjqqsa9fe6p7p3ucdr69n93pt44ou8vh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
