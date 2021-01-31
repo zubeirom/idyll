@@ -6,6 +6,8 @@ import 'package:idyll/widgets/product_hunt/image_article_item.dart';
 import 'package:idyll/widgets/screen_header.dart';
 import 'package:provider/provider.dart';
 
+import 'search_screen.dart';
+
 class ProductHuntScreen extends StatefulWidget {
   static const routeName = "/producthunt";
   @override
@@ -62,7 +64,8 @@ class _ProductHuntScreenState extends State<ProductHuntScreen> {
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               icon: Icon(Icons.search, color: Colors.black),
-              onPressed: () => {},
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(SearchScreen.routeName),
             ),
           )
         ],

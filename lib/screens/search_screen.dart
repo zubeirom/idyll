@@ -45,7 +45,6 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _handleSubmitted(String val) {
-    print(val);
     Provider.of<Query>(context, listen: false).addQuery(val.trim()).then((_) {
       Navigator.of(context)
           .popAndPushNamed(QueryScreen.routeName, arguments: val.trim());

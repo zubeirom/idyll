@@ -33,10 +33,21 @@ class Query with ChangeNotifier {
           queries = prefs.getStringList(KEY);
         }
 
-        prefs.setStringList(KEY, [...queries, query]).then((_) {
+        prefs.setStringList(KEY, [query, ...queries]).then((_) {
           notifyListeners();
         });
       }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> deleteQuery(String query) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      _queries.remove(query);
+      await prefs.setStringList(KEY, [..._queries]);
+      notifyListeners();
     } catch (e) {
       throw e;
     }

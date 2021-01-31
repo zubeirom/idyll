@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:idyll/providers/query.dart';
+import '../screens/query_screen.dart';
 
 class QueryList extends StatelessWidget {
   @override
@@ -15,7 +16,10 @@ class QueryList extends StatelessWidget {
         children: queries.map((query) {
           return Column(children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context)
+                    .popAndPushNamed(QueryScreen.routeName, arguments: query);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -30,7 +34,10 @@ class QueryList extends StatelessWidget {
                   ),
                   IconButton(
                     icon: Icon(Icons.close),
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<Query>(context, listen: false)
+                          .deleteQuery(query);
+                    },
                   )
                 ],
               ),

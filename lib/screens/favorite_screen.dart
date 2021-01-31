@@ -5,6 +5,7 @@ import 'package:idyll/providers/favorite.dart';
 import 'package:idyll/providers/news.dart';
 import 'package:provider/provider.dart';
 import '../widgets/favorite_news_list.dart';
+import 'search_screen.dart';
 
 class FavoriteScreen extends StatefulWidget {
   static const routeName = "/favorites";
@@ -68,7 +69,8 @@ class _FavoriteScreenState extends State<FavoriteScreen>
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               icon: Icon(Icons.search, color: Colors.black),
-              onPressed: () => {},
+              onPressed: () =>
+                  {Navigator.of(context).pushNamed(SearchScreen.routeName)},
             ),
           )
         ],
