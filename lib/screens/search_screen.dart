@@ -70,6 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
     ));
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         brightness: Brightness.light,
         elevation: 0,

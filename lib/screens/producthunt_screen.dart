@@ -36,6 +36,13 @@ class _ProductHuntScreenState extends State<ProductHuntScreen> {
     super.didChangeDependencies();
   }
 
+  Future<void> _refreshPage(BuildContext context) async {
+    setState(() {
+      _isInit = true;
+    });
+    didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -69,33 +76,36 @@ class _ProductHuntScreenState extends State<ProductHuntScreen> {
         centerTitle: true,
         title: ScreenHeader('Product Hunt'),
       ),
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-              ),
-            )
-          : SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 15),
-                    Container(
-                      child: ScreenHeader("Tech Posts of Today"),
-                    ),
-                    SizedBox(height: 30),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: articles
-                          .map((article) => ImageArticleItem(article))
-                          .toList(),
-                    )
-                  ],
+      body: RefreshIndicator(
+        onRefresh: () => _refreshPage(context),
+        child: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              )
+            : SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 15),
+                      Container(
+                        child: ScreenHeader("Tech Posts of Today"),
+                      ),
+                      SizedBox(height: 30),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: articles
+                            .map((article) => ImageArticleItem(article))
+                            .toList(),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }

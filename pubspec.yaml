@@ -33,6 +33,8 @@ dependencies:
   shared_preferences: ^0.5.12+4
   numeral: ^1.0.4
   flushbar: ^1.10.4
+  share: ^0.6.5+4
+  social_share: ^2.0.5
 
 
 

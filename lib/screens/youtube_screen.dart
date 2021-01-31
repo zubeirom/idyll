@@ -36,6 +36,13 @@ class _YoutubeScreenState extends State<YoutubeScreen> {
     super.didChangeDependencies();
   }
 
+  Future<void> _refreshPage() async {
+    setState(() {
+      _isInit = true;
+    });
+    didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -69,33 +76,36 @@ class _YoutubeScreenState extends State<YoutubeScreen> {
         centerTitle: true,
         title: ScreenHeader('YouTube'),
       ),
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-              ),
-            )
-          : SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 15),
-                    Container(
-                      child: ScreenHeader("Most Trending Videos"),
-                    ),
-                    SizedBox(height: 30),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: articles
-                          .map((article) => ImageArticleItem(article))
-                          .toList(),
-                    )
-                  ],
+      body: RefreshIndicator(
+        onRefresh: () => _refreshPage(),
+        child: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              )
+            : SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 15),
+                      Container(
+                        child: ScreenHeader("Most Trending Videos"),
+                      ),
+                      SizedBox(height: 30),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: articles
+                            .map((article) => ImageArticleItem(article))
+                            .toList(),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }

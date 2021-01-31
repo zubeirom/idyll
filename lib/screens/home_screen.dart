@@ -77,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     setState(() {
       _isInit = true;
     });
+    didChangeDependencies();
   }
 
   @override
