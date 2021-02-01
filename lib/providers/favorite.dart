@@ -51,7 +51,7 @@ class Favorite with ChangeNotifier {
 
         String encoded = jsonEncode(article);
 
-        prefs.setStringList(NEWS, [...favoriteNews, encoded]);
+        prefs.setStringList(NEWS, [encoded, ...favoriteNews]);
       }
 
       notifyListeners();
