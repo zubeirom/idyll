@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:idyll/screens/countries_screen.dart';
 import 'package:idyll/screens/favorite_screen.dart';
 import 'package:idyll/screens/hackernews_screen.dart';
 import 'package:idyll/screens/home_screen.dart';
@@ -33,6 +34,23 @@ class AppDrawer extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context)
                         .popAndPushNamed(FavoriteScreen.routeName);
+                  },
+                ),
+                SizedBox(height: 25),
+                InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ScreenHeader('Countries'),
+                      Icon(
+                        Icons.public,
+                        size: 26,
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context)
+                        .popAndPushNamed(CountriesScreen.routeName);
                   },
                 ),
                 SizedBox(height: 25),

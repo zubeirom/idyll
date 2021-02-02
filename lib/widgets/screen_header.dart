@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ScreenHeader extends StatelessWidget {
   final String title;
+  final double size;
+  final FontWeight weight;
 
-  ScreenHeader(this.title);
+  ScreenHeader(this.title, {this.size = 25, this.weight = FontWeight.w700});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,9 @@ class ScreenHeader extends StatelessWidget {
       title,
       style: GoogleFonts.openSans(
         textStyle: TextStyle(
-            color: Colors.black, fontSize: 25, fontWeight: FontWeight.w700),
+            color: Colors.black,
+            fontSize: this.size,
+            fontWeight: FontWeight.w700),
       ),
     );
   }

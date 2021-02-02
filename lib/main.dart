@@ -4,6 +4,7 @@ import 'package:idyll/providers/favorite.dart';
 import 'package:idyll/providers/hackernews.dart';
 import 'package:idyll/providers/reddit.dart';
 import 'package:idyll/providers/youtube.dart';
+import 'package:idyll/screens/countries_screen.dart';
 import 'package:idyll/screens/favorite_screen.dart';
 import 'package:idyll/screens/hackernews_screen.dart';
 import 'package:idyll/screens/producthunt_screen.dart';
@@ -78,7 +79,7 @@ class MyApp extends StatelessWidget {
     }
 
     return [
-      const Locale('de', 'DK'),
+      const Locale('da', 'DK'),
       const Locale('de', 'AT'),
       const Locale('de', 'CH'),
       const Locale('de', 'DE'),
@@ -153,7 +154,8 @@ class MyApp extends StatelessWidget {
                 HackerNewsScreen.routeName: (ctx) => HackerNewsScreen(),
                 SearchScreen.routeName: (ctx) => SearchScreen(),
                 QueryScreen.routeName: (ctx) => QueryScreen(),
-                PrivacyPolicyScreen.routeName: (ctx) => PrivacyPolicyScreen()
+                PrivacyPolicyScreen.routeName: (ctx) => PrivacyPolicyScreen(),
+                CountriesScreen.routeName: (ctx) => CountriesScreen()
               },
               localizationsDelegates: [
                 GlobalMaterialLocalizations.delegate,

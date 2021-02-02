@@ -23,13 +23,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   String _locale;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  List<Article> headlines;
+  List<Article> headlines = [];
   Map<String, List<Article>> categoryArticles = {
     'business': [],
     'scienceandtech': [],
     'health': [],
     'sports': [],
-    'ussports': [],
+    'politics': [],
     'world': [],
     'products': [],
     'entertainment': [],
@@ -58,18 +58,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
       _locale = myLocale.languageCode + "-" + myLocale.countryCode;
 
-      final newsProvider = Provider.of<News>(context, listen: false);
+      //final newsProvider = Provider.of<News>(context, listen: false);
       print(_locale);
 
-      newsProvider.getHeadlines(locale: _locale.toLowerCase()).then((_) {
-        headlines = newsProvider.headlines;
-        newsProvider.populateCategories().then((_) {
-          categoryArticles = newsProvider.categoryArticles;
-          setState(() {
-            _isLoading = false;
-          });
-        });
-      });
+      // newsProvider.getHeadlines(locale: _locale.toLowerCase()).then((_) {
+      //   headlines = newsProvider.headlines;
+      //   newsProvider.populateCategories(_locale.toLowerCase()).then((_) {
+      //     categoryArticles = newsProvider.categoryArticles;
+      //     setState(() {
+      _isLoading = false;
+      //     });
+      //   });
+      // });
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -147,15 +147,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                       SizedBox(height: 25),
                       HomeNewsList("Business", categoryArticles["business"]),
-                      HomeNewsList("Health", categoryArticles["health"]),
                       HomeNewsList("Science and Tech",
                           categoryArticles["scienceandtech"]),
-                      HomeNewsList("World", categoryArticles["world"]),
                       HomeNewsList("Sports", categoryArticles["sports"]),
+                      HomeNewsList("World", categoryArticles["world"]),
+                      HomeNewsList("Health", categoryArticles["health"]),
+                      HomeNewsList("Politics", categoryArticles["politics"]),
+                      HomeNewsList("Products", categoryArticles["products"]),
                       HomeNewsList(
                           "Entertainment", categoryArticles["entertainment"]),
-                      HomeNewsList("Products", categoryArticles["products"]),
-                      HomeNewsList("US Sports", categoryArticles["sports"]),
                     ],
                   ),
                 ),

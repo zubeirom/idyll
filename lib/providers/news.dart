@@ -48,13 +48,7 @@ class News with ChangeNotifier {
   static const BASE_URL = "https://api-idyll.now.sh";
 
   List<Article> _headlinesList = [];
-  Map<String, List<Article>> _categoryArticles = {
-    'business': [],
-    'science': [],
-    'health': [],
-    'technology': [],
-    'sport': []
-  };
+  Map<String, List<Article>> _categoryArticles = {};
 
   List<Article> _searchResults = [];
 
@@ -85,7 +79,7 @@ class News with ChangeNotifier {
   Future<List<Article>> getByCategory(String category, String locale) async {
     try {
       final res =
-          await http.get(BASE_URL + '/category?value=$category&mkt=$locale');
+          await http.get(BASE_URL + '/category?value=$category&locale=$locale');
       final extractData = json.decode(res.body) as Map<String, dynamic>;
       final list = _mapBing(extractData['value']);
       notifyListeners();
@@ -95,18 +89,18 @@ class News with ChangeNotifier {
     }
   }
 
-  Future<void> populateCategories() async {
+  Future<void> populateCategories(String locale) async {
     try {
       Map<String, List<Article>> data = {};
-      data['business'] = await getByCategory('business', "en-us");
+      data['business'] = await getByCategory('business', locale);
       data['scienceandtech'] =
-          await getByCategory('ScienceAndTechnology', "en-us");
-      data['health'] = await getByCategory('health', "en-us");
-      data['sports'] = await getByCategory('sports', "en-gb");
-      data["ussports"] = await getByCategory("sports", "en-us");
+          await getByCategory('ScienceAndTechnology', locale);
+      data['sports'] = await getByCategory('sports', locale);
       data["world"] = await getByCategory("world", "en-us");
+      data["politics"] = await getByCategory("politics", "en-us");
       data["products"] = await getByCategory("products", "en-us");
-      data["entertainment"] = await getByCategory("entertainment", "en-us");
+      data['health'] = await getByCategory('health', "en-us");
+      data["entertainment"] = await getByCategory("entertainment", locale);
 
       _categoryArticles = data;
     } catch (e) {
