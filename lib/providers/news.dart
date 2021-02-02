@@ -108,9 +108,9 @@ class News with ChangeNotifier {
     }
   }
 
-  Future<List<Article>> getFromQuery(String query) async {
+  Future<List<Article>> getFromQuery(String query, String locale) async {
     try {
-      final res = await http.get(BASE_URL + '/search?q=$query');
+      final res = await http.get(BASE_URL + '/search?q=$query&locale=$locale');
       final extractData = json.decode(res.body) as Map<String, dynamic>;
       return _mapBing(extractData['value']);
     } catch (e) {

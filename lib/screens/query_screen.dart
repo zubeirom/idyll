@@ -3,6 +3,7 @@ import 'package:idyll/providers/news.dart';
 import 'package:idyll/widgets/news_item.dart';
 import 'package:idyll/widgets/screen_header.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'search_screen.dart';
 
@@ -17,6 +18,7 @@ class _QueryScreenState extends State<QueryScreen> {
   bool _isInit = true;
   List<Article> searchResults = [];
   String query;
+  String _locale = "";
 
   @override
   void didChangeDependencies() {
@@ -24,11 +26,22 @@ class _QueryScreenState extends State<QueryScreen> {
       setState(() {
         _isLoading = true;
       });
-      query = ModalRoute.of(context).settings.arguments as String;
-      Provider.of<News>(context, listen: false).getFromQuery(query).then((res) {
-        setState(() {
-          _isLoading = false;
-          searchResults = res;
+
+      Locale myLocale = Localizations.localeOf(context);
+
+      SharedPreferences.getInstance().then((prefs) {
+        _locale = prefs.getString("preferred_locale") ??
+            myLocale.languageCode + "-" + myLocale.countryCode;
+        print(_locale);
+
+        query = ModalRoute.of(context).settings.arguments as String;
+        Provider.of<News>(context, listen: false)
+            .getFromQuery(query, _locale)
+            .then((res) {
+          setState(() {
+            _isLoading = false;
+            searchResults = res;
+          });
         });
       });
     }
