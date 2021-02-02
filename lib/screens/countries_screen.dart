@@ -1,7 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:idyll/widgets/regular_button.dart';
 import 'package:idyll/widgets/screen_header.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'search_screen.dart';
 
@@ -18,6 +22,24 @@ class _CountriesScreenState extends State<CountriesScreen> {
   void handleSelectedLocale(String locale) {
     setState(() {
       groupLocale = locale;
+    });
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setString("preferred_locale", locale);
+      Flushbar(
+        animationDuration: Duration(milliseconds: 500),
+        borderRadius: 8,
+        messageText: AutoSizeText(
+          'Location is set! Please reload the news page',
+          style: GoogleFonts.domine(
+            textStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        duration: Duration(seconds: 2),
+      )..show(context);
     });
   }
 
@@ -70,8 +92,29 @@ class _CountriesScreenState extends State<CountriesScreen> {
                   ),
                 ),
                 RegularButton("Reset", () {
+                  Locale myLocale = Localizations.localeOf(context);
+
                   setState(() {
                     groupLocale = "";
+                  });
+                  SharedPreferences.getInstance().then((prefs) {
+                    prefs.setString("preferred_locale",
+                        myLocale.languageCode + "-" + myLocale.countryCode);
+                    Flushbar(
+                      animationDuration: Duration(milliseconds: 500),
+                      borderRadius: 8,
+                      messageText: AutoSizeText(
+                        'Location is reset',
+                        style: GoogleFonts.domine(
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      backgroundColor: Colors.white,
+                      duration: Duration(seconds: 2),
+                    )..show(context);
                   });
                 })
               ]),

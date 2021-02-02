@@ -7,6 +7,7 @@ import 'package:idyll/widgets/app_drawer.dart';
 import 'package:idyll/widgets/headline.dart';
 import 'package:idyll/widgets/home_news_list.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/screen_header.dart';
 import './search_screen.dart';
 
@@ -56,20 +57,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
       Locale myLocale = Localizations.localeOf(context);
 
-      _locale = myLocale.languageCode + "-" + myLocale.countryCode;
+      SharedPreferences.getInstance().then((prefs) {
+        _locale = prefs.getString("preferred_locale") ??
+            myLocale.languageCode + "-" + myLocale.countryCode;
+        final newsProvider = Provider.of<News>(context, listen: false);
+        print(_locale);
 
-      //final newsProvider = Provider.of<News>(context, listen: false);
-      print(_locale);
-
-      // newsProvider.getHeadlines(locale: _locale.toLowerCase()).then((_) {
-      //   headlines = newsProvider.headlines;
-      //   newsProvider.populateCategories(_locale.toLowerCase()).then((_) {
-      //     categoryArticles = newsProvider.categoryArticles;
-      //     setState(() {
-      _isLoading = false;
-      //     });
-      //   });
-      // });
+        newsProvider.getHeadlines(locale: _locale.toLowerCase()).then((_) {
+          headlines = newsProvider.headlines;
+          newsProvider.populateCategories(_locale.toLowerCase()).then((_) {
+            categoryArticles = newsProvider.categoryArticles;
+            setState(() {
+              _isLoading = false;
+            });
+          });
+        });
+      });
     }
     _isInit = false;
     super.didChangeDependencies();
