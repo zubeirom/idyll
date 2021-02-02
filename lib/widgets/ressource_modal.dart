@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:idyll/providers/favorite.dart';
@@ -9,12 +12,12 @@ import 'package:idyll/widgets/regular_button.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
-import 'package:social_share/social_share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RessourceModal extends StatelessWidget {
   final Article article;
   final bool isFavorite;
+  final MethodChannel _channel = const MethodChannel('social_share');
 
   RessourceModal(this.article, this.isFavorite);
 
@@ -24,6 +27,37 @@ class RessourceModal extends StatelessWidget {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  Future<String> shareOnTwitter(String captionText,
+      {List<String> hashtags, String url, String trailingText}) async {
+    Map<String, dynamic> args;
+    String modifiedUrl;
+    if (Platform.isAndroid) {
+      modifiedUrl = Uri.parse(url).toString().replaceAll('#', "%23");
+    } else {
+      modifiedUrl = Uri.parse(url).toString();
+    }
+    if (hashtags != null && hashtags.isNotEmpty) {
+      String tags = "";
+      hashtags.forEach((f) {
+        tags += ("%23" + f.toString() + " ").toString();
+      });
+      args = <String, dynamic>{
+        "captionText": captionText + "\n" + tags.toString(),
+        "url": modifiedUrl,
+        "trailingText": Uri.parse(trailingText).toString()
+      };
+    } else {
+      args = <String, dynamic>{
+        "captionText": Uri.parse(captionText + " ").toString(),
+        "url": modifiedUrl,
+        "trailingText": Uri.parse(trailingText).toString()
+      };
+    }
+    print('hello');
+    final String version = await _channel.invokeMethod('shareTwitter', args);
+    return version;
   }
 
   @override
@@ -59,7 +93,7 @@ class RessourceModal extends StatelessWidget {
                       child: IconButton(
                         icon: FaIcon(FontAwesomeIcons.twitter),
                         onPressed: () {
-                          SocialShare.shareTwitter(article.title,
+                          shareOnTwitter(article.title,
                               url: article.url,
                               hashtags: ["found", "on", "idyll"],
                               trailingText: "");
