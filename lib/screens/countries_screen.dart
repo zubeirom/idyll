@@ -18,6 +18,23 @@ class CountriesScreen extends StatefulWidget {
 
 class _CountriesScreenState extends State<CountriesScreen> {
   String groupLocale = "";
+  bool _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      SharedPreferences.getInstance().then((prefs) {
+        if (prefs.getString('preferred_locale') != null) {
+          setState(() {
+            groupLocale = prefs.getString('preferred_locale');
+          });
+        }
+      });
+    }
+
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   void handleSelectedLocale(String locale) {
     setState(() {
