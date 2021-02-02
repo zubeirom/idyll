@@ -42,10 +42,10 @@ class Reddit with ChangeNotifier {
             title: article['data']['title'] +
                 " - " +
                 article['data']['subreddit_name_prefixed'],
-            url: article['data']['permalink'],
+            url: article['data']['url'],
             urlToImage: checkIfImageExists(article['data'])
                 ? article['data']['url_overridden_by_dest']
-                : "https://i.imgur.com/SSdqxoD.png",
+                : "https://i.imgur.com/3eY3trj.jpg",
             category: "Reddit"),
       );
     });

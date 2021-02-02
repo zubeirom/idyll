@@ -44,7 +44,9 @@ class Youtube with ChangeNotifier {
                 " - " +
                 article['snippet']['channelTitle'],
             url: "https://youtube.com/watch?v=" + article['id'],
-            urlToImage: article['snippet']['thumbnails']['standard']['url'],
+            urlToImage: article['snippet']['thumbnails']['standard'] != null
+                ? article['snippet']['thumbnails']['standard']['url']
+                : "https://i.imgur.com/3wz0jHy.jpg",
             category: "YouTube"),
       );
     });

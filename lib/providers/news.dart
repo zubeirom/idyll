@@ -150,6 +150,19 @@ class News with ChangeNotifier {
               category: "News"),
         );
       }
+
+      if (article['image'] == null) {
+        loadedArticles.add(
+          Article(
+              provider: article['provider'][0]['name'],
+              description: article['description'],
+              publishedAt: DateTime.parse(article['datePublished']),
+              title: article['name'],
+              url: article['url'],
+              urlToImage: "https://i.imgur.com/e1iDZGd.jpg",
+              category: "News"),
+        );
+      }
     });
     return loadedArticles;
   }
