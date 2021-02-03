@@ -100,7 +100,11 @@ class RessourceModal extends StatelessWidget {
                           shareOnTwitter(article.title,
                               url: article.url,
                               hashtags: ["found", "on", "idyll"],
-                              trailingText: "");
+                              trailingText: "").then((res) {
+                                if(Platform.isIOS && res == "cannot find Twitter app") {
+                                  launch(Uri.encodeFull("https://twitter.com/intent/tweet?text=${article.title}&url=${article.url}"), forceSafariVC: true);
+                                }
+                              });
                         },
                         color: Colors.black,
                         iconSize: 16,
