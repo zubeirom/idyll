@@ -55,8 +55,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _isLoading = true;
       });
 
-      FirebaseCrashlytics.instance.crash();
-
       Locale myLocale = Localizations.localeOf(context);
 
       SharedPreferences.getInstance().then((prefs) {
