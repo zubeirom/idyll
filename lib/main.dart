@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:idyll/providers/favorite.dart';
@@ -22,12 +23,15 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:io' show Platform;
 
-void main() {
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
     systemNavigationBarColor: Colors.black,
   ));
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   runApp(
     MultiProvider(
       providers: [
@@ -126,48 +130,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      // Initialize FlutterFire
-      future: Firebase.initializeApp(),
-      builder: (context, snapshot) {
-        // Check for errors
-
-        // if (snapshot.hasError) {
-        //   return SomethingWentWrong();
-        // }
-
-        // Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Idyll',
-              theme: ThemeData(
-                accentColor: Colors.black,
-              ),
-              home: HomeScreen(),
-              routes: {
-                FavoriteScreen.routeName: (ctx) => FavoriteScreen(),
-                HomeScreen.routeName: (ctx) => HomeScreen(),
-                ProductHuntScreen.routeName: (ctx) => ProductHuntScreen(),
-                YoutubeScreen.routeName: (ctx) => YoutubeScreen(),
-                RedditScreen.routeName: (ctx) => RedditScreen(),
-                HackerNewsScreen.routeName: (ctx) => HackerNewsScreen(),
-                SearchScreen.routeName: (ctx) => SearchScreen(),
-                QueryScreen.routeName: (ctx) => QueryScreen(),
-                PrivacyPolicyScreen.routeName: (ctx) => PrivacyPolicyScreen(),
-                CountriesScreen.routeName: (ctx) => CountriesScreen()
-              },
-              localizationsDelegates: [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: _supportedLocales());
-        }
-
-        // Otherwise, show something whilst waiting for initialization to complete
-        return CircularProgressIndicator();
-      },
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Idyll',
+        theme: ThemeData(
+          accentColor: Colors.black,
+        ),
+        home: HomeScreen(),
+        routes: {
+          FavoriteScreen.routeName: (ctx) => FavoriteScreen(),
+          HomeScreen.routeName: (ctx) => HomeScreen(),
+          ProductHuntScreen.routeName: (ctx) => ProductHuntScreen(),
+          YoutubeScreen.routeName: (ctx) => YoutubeScreen(),
+          RedditScreen.routeName: (ctx) => RedditScreen(),
+          HackerNewsScreen.routeName: (ctx) => HackerNewsScreen(),
+          SearchScreen.routeName: (ctx) => SearchScreen(),
+          QueryScreen.routeName: (ctx) => QueryScreen(),
+          PrivacyPolicyScreen.routeName: (ctx) => PrivacyPolicyScreen(),
+          CountriesScreen.routeName: (ctx) => CountriesScreen()
+        },
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: _supportedLocales());
   }
 }
