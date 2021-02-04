@@ -78,8 +78,8 @@ class Headline extends StatelessWidget {
                           ),
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          minFontSize: 16,
+                          maxLines: 2,
+                          minFontSize: 15,
                         ),
                         SizedBox(height: 5),
                         AutoSizeText(
