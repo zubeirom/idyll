@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/query_list.dart';
 import './query_screen.dart';
+import 'dart:io';
 
 class SearchScreen extends StatefulWidget {
   static const routeName = "/search";
@@ -58,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _handleSubmitted(String val) {
-    if (blacklist.contains(val.trim().toLowerCase())) {
+    if (Platform.isIOS && blacklist.contains(val.trim().toLowerCase())) {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
