@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:idyll/providers/query.dart';
 import 'package:idyll/widgets/screen_header.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../widgets/query_list.dart';
 import './query_screen.dart';
 
@@ -18,6 +19,18 @@ class _SearchScreenState extends State<SearchScreen> {
   String searchQuery = "Search query";
   List<String> queries = [];
   bool _isLoading = false;
+
+  List<String> blacklist = [
+    "corona",
+    "coronavirus",
+    "covid",
+    "sarscov-2",
+    "sars-cov-2",
+    "sarscov",
+    "sars-cov",
+    "pandemic",
+    "covid-19"
+  ];
 
   @override
   void didChangeDependencies() {
@@ -45,6 +58,44 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _handleSubmitted(String val) {
+    if (blacklist.contains(val.trim().toLowerCase())) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Text(
+            'Apple Guidelines',
+            style: GoogleFonts.openSans(
+              textStyle: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          content: Text(
+            'Due to apple guidelines we are not allowed to show you search results concerning the pandemic as the application is not part of a recognized institution',
+            style: GoogleFonts.openSans(),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                'Learn more',
+                style: GoogleFonts.openSans(
+                  textStyle: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ),
+              onPressed: () {
+                launch(
+                    Uri.encodeFull(
+                        "https://developer.apple.com/news/?id=03142020a"),
+                    forceSafariVC: true);
+              },
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
     Provider.of<Query>(context, listen: false).addQuery(val.trim()).then((_) {
       Navigator.of(context)
           .popAndPushNamed(QueryScreen.routeName, arguments: val.trim());
