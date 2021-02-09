@@ -66,32 +66,15 @@ class _SearchScreenState extends State<SearchScreen> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           title: Text(
-            'Apple Guidelines',
+            'No results',
             style: GoogleFonts.openSans(
               textStyle: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           content: Text(
-            'Due to apple guidelines we are not allowed to show you search results concerning the pandemic as the application is not part of a recognized institution',
+            "We couldn't find articles about '$val'",
             style: GoogleFonts.openSans(),
           ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(
-                'Learn more',
-                style: GoogleFonts.openSans(
-                  textStyle: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-              ),
-              onPressed: () {
-                launch(
-                    Uri.encodeFull(
-                        "https://developer.apple.com/news/?id=03142020a"),
-                    forceSafariVC: true);
-              },
-            ),
-          ],
         ),
       );
       return;
