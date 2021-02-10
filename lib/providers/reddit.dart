@@ -55,9 +55,10 @@ class Reddit with ChangeNotifier {
   bool checkIfImageExists(Map data) {
     String thumbnail = data['thumbnail'];
     String ov = data['url_overridden_by_dest'];
-    if (thumbnail.contains('http') &&
-        (ov.contains('.jpg') || ov.contains('.png'))) {
-      return true;
+    if (thumbnail.contains('http') && ov != null) {
+      if (ov.contains('.jpg') || ov.contains('.png')) {
+        return true;
+      }
     }
     return false;
   }
