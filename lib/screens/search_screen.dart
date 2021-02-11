@@ -66,13 +66,13 @@ class _SearchScreenState extends State<SearchScreen> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           title: Text(
-            'No results',
+            'We apologize',
             style: GoogleFonts.openSans(
               textStyle: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           content: Text(
-            "We couldn't find articles about '$val'",
+            "We are not able to show you search results about '$val' as we are not part of a recognized institution",
             style: GoogleFonts.openSans(),
           ),
         ),
