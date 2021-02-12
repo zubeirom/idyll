@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -51,6 +52,18 @@ class News with ChangeNotifier {
   Map<String, List<Article>> _categoryArticles = {};
 
   List<Article> _searchResults = [];
+
+  List<String> blacklist = [
+    "corona",
+    "coronavirus",
+    "covid",
+    "sarscov-2",
+    "sars-cov-2",
+    "sarscov",
+    "sars-cov",
+    "pandemic",
+    "covid-19"
+  ];
 
   List<Article> get searchResults {
     return [..._searchResults];
@@ -121,6 +134,11 @@ class News with ChangeNotifier {
   List<Article> _mapBing(List data) {
     final List<Article> loadedArticles = [];
     data.forEach((article) {
+      String title = article['name'];
+      if (Platform.isIOS && blacklist.contains(title.trim().toLowerCase())) {
+        return;
+      }
+
       loadedArticles.add(
         Article(
             provider: article['provider'][0]['name'],
