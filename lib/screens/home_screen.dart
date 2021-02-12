@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/screen_header.dart';
 import './search_screen.dart';
+import 'dart:io';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
@@ -154,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           categoryArticles["scienceandtech"]),
                       HomeNewsList("Sports", categoryArticles["sports"]),
                       HomeNewsList("World", categoryArticles["world"]),
-                      HomeNewsList("Health", categoryArticles["health"]),
+                      Platform.isIOS ? SizedBox() : HomeNewsList("Health", categoryArticles["health"]),
                       HomeNewsList("Politics", categoryArticles["politics"]),
                       HomeNewsList("Products", categoryArticles["products"]),
                       HomeNewsList(

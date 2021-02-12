@@ -135,7 +135,7 @@ class News with ChangeNotifier {
     final List<Article> loadedArticles = [];
     data.forEach((article) {
       String title = article['name'];
-      if (Platform.isIOS && blacklist.contains(title.trim().toLowerCase())) {
+      if (Platform.isIOS && blacklist.contains(title.toLowerCase())) {
         return;
       }
 
