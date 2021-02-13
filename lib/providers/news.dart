@@ -62,7 +62,9 @@ class News with ChangeNotifier {
     "sarscov",
     "sars-cov",
     "pandemic",
-    "covid-19"
+    "covid-19",
+    "lockdown",
+    "virus"
   ];
 
   List<Article> get searchResults {
@@ -134,9 +136,19 @@ class News with ChangeNotifier {
   List<Article> _mapBing(List data) {
     final List<Article> loadedArticles = [];
     data.forEach((article) {
-      String title = article['name'];
-      if (Platform.isIOS && blacklist.contains(title.toLowerCase())) {
-        return;
+      if (Platform.isIOS) {
+        String title = article['name'];
+        bool res = false;
+
+        for (var item in blacklist) {
+          if (title.toLowerCase().contains(item)) {
+            res = true;
+          }
+        }
+
+        if (res) {
+          return;
+        }
       }
 
       loadedArticles.add(
@@ -156,6 +168,21 @@ class News with ChangeNotifier {
   List<Article> _mapArticle(List data) {
     final List<Article> loadedArticles = [];
     data.forEach((article) {
+      if (Platform.isIOS) {
+        String title = article['name'];
+        bool res = false;
+
+        for (var item in blacklist) {
+          if (title.toLowerCase().contains(item)) {
+            res = true;
+          }
+        }
+
+        if (res) {
+          return;
+        }
+      }
+
       if (article['image'] != null) {
         loadedArticles.add(
           Article(
