@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -13,6 +14,21 @@ class Youtube with ChangeNotifier {
   Youtube() {
     getNewsArticles();
   }
+
+  List<String> blacklist = [
+    "corona",
+    "coronavirus",
+    "covid",
+    "sarscov-2",
+    "sars-cov-2",
+    "sarscov",
+    "sars-cov",
+    "pandemic",
+    "covid-19",
+    "lockdown",
+    "virus",
+    "vaccine"
+  ];
 
   List<Article> _newsArticles = [];
 
@@ -34,6 +50,20 @@ class Youtube with ChangeNotifier {
   List<Article> _mapArticle(List data) {
     final List<Article> loadedArticles = [];
     data.forEach((article) {
+      if (Platform.isIOS) {
+        String title = article['snippet']['title'];
+        bool res = false;
+
+        for (var item in blacklist) {
+          if (title.toLowerCase().contains(item)) {
+            res = true;
+          }
+        }
+
+        if (res) {
+          return;
+        }
+      }
       loadedArticles.add(
         Article(
             provider: "Views: " +

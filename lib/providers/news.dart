@@ -64,7 +64,8 @@ class News with ChangeNotifier {
     "pandemic",
     "covid-19",
     "lockdown",
-    "virus"
+    "virus",
+    "vaccine"
   ];
 
   List<Article> get searchResults {
